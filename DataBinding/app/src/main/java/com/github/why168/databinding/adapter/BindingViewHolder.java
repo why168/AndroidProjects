@@ -11,10 +11,10 @@ import android.view.View;
  * @version 2016/11/28 11:01
  * @since JDK1.8
  */
-public class BindingViewHolder<T extends ViewDataBinding> extends RecyclerView.ViewHolder {
+class BindingViewHolder<T extends ViewDataBinding> extends RecyclerView.ViewHolder {
     private T binding;
 
-    public BindingViewHolder(View itemView) {
+    BindingViewHolder(View itemView) {
         super(itemView);
     }
 

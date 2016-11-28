@@ -38,8 +38,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<BindingViewHolder<
 
     @Override
     public BindingViewHolder<ItemRecyclerViewBinding> onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemRecyclerViewBinding inflate = DataBindingUtil.inflate(mLayoutInflater, R.layout.item_recycler_view, parent, false);
-        return new BindingViewHolder<>(inflate.getRoot());
+        ItemRecyclerViewBinding binding = DataBindingUtil.inflate(mLayoutInflater, R.layout.item_recycler_view, parent, false);
+
+        BindingViewHolder<ItemRecyclerViewBinding> holder = new BindingViewHolder<ItemRecyclerViewBinding>(binding.getRoot());
+
+        holder.setBinding(binding);
+
+        return viewDataBindingBindingViewHolder;
     }
 
     @Override
