@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 集合共同的集合:数组,列表、稀疏的列表和地图,可以使用[]操作符为了方便访问。-->
+
+    <data>
+
+        <import type="android.util.SparseArray" />
+
+        <import type="java.util.Map" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="list"
+            type="List&lt;String&gt;" />
+
+        <variable
+            name="sparse"
+            type="SparseArray&lt;String&gt;" />
+
+        <variable
+            name="map"
+            type="Map&lt;String, String&gt;" />
+
+        <variable
+            name="index"
+            type="int" />
+
+        <variable
+            name="key"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+</layout>

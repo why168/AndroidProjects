@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.github.why168.databinding.model.Bean.DataBean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/image_recycler_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:imageUrl="@{data.img}"
+            app:placeHolder="@{@drawable/ic_launcher}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_recycler_title"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@{data.title}"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_recycler_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@{data.subtitle}"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
