@@ -270,7 +270,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<BindingViewHolder<
 }
 ```
 
-```xml
+```java
 /**
  * ViewModel
  * <p>
