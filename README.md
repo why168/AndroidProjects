@@ -8,6 +8,7 @@
 
 ## <font color="red">1.Data Binding框架MVVM</font> 
 
+<font>项目源码位置：AndroidProjects/DataBinding目录</font> 
 
 ##### 参考资料
 
@@ -30,8 +31,6 @@ android {
     }
 }
 ```
-
-<font>项目源码位置：AndroidProjects/DataBinding目录</font> 
 
 ##### 效果图
 
