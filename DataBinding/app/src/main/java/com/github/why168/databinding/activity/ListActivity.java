@@ -1,7 +1,6 @@
 package com.github.why168.databinding.activity;
 
 import android.content.res.AssetManager;
-import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
