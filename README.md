@@ -1,16 +1,32 @@
 # AndroidProjects
-* **个人总结归纳-目录**
-	* 1.Data Binding学习
-	* 2.补充更新...
+* **个人总结归纳-目录大纲**
+	1. Data Binding框架MVVM
+	2. BaseView
+	3. 补充更新...
 		
 
 
 
-## <font color="red">1.Data Binding框架MVVM</font> 
+## 1.Data Binding框架MVVM
 
 <font>项目源码位置：AndroidProjects/DataBinding目录</font> 
 
-##### 参考资料
+### 介绍
+
+* Data binding 在2015年7月发布的Android Studio v1.3.0 版本上引入，在2016年4月Android Studio v2.0.0 上正式支持。目前为止，Data Binding 已经支持双向绑定了。
+
+* Data Binding 解决了 Android UI 编程中的一个痛点，官方原生支持 MVVM 模型可以让我们在不改变既有代码框架的前提下，非常容易地使用这些新特性；
+
+* Databinding 是一个实现数据和UI绑定的框架，是一个实现 MVVM 模式的工具，有了 Data Binding，在Android中也可以很方便的实现MVVM开发模式。
+
+* Data Binding 是一个support库，最低支持到Android 2.1（API Level 7+）。
+
+* Data Binding 之前，我们不可避免地要编写大量的毫无营养的代码，如 findViewById()、setText()，setVisibility()，setEnabled() 或 setOnClickListener() 等，通过 Data Binding , 我们可以通过声明式布局以精简的代码来绑定应用程序逻辑和布局，这样就不用编写大量的毫无营养的代码了。
+
+
+
+
+### 参考资料
 
 * <a target="_blank" href="https://developer.android.com/topic/libraries/data-binding/index.html">https://developer.android.com/topic/libraries/data-binding/index.html</a>
 
@@ -22,7 +38,7 @@
 
 * <a target="_blank" href="http://www.imooc.com/learn/720">http://www.imooc.com/learn/720</a>
 
-##### Gradle配置：
+### Gradle配置：
 
 ```groovy
 android {  
@@ -32,11 +48,11 @@ android {
 }
 ```
 
-##### 效果图
+### 效果图
 ![DataBinding-art](https://raw.githubusercontent.com/why168/AndroidProjects/master/Art/DataBinding-art.gif)
 
 
-##### 示例代码
+### 示例代码
 
 ```java
 /**
@@ -359,6 +375,19 @@ item_recycler_view.xml
 </layout>
 ```
 
+
+## 2. BaseView
+
+<font>项目源码位置：AndroidProjects/BaseView目录</font> 
+
+### 介绍
+
+* 手写代码通过参数配置布局,提高APP性能,提高复用。
+
+### 效果图
+![DataBinding-art](https://raw.githubusercontent.com/why168/AndroidProjects/master/Art/BaseView-art.gif)
+
+### 示例代码
 
 <br>
 <br>
