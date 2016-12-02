@@ -44,7 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<BindingViewHolder<
 
         holder.setBinding(binding);
 
-        return viewDataBindingBindingViewHolder;
+        return holder;
     }
 
     @Override

@@ -9,7 +9,7 @@
 ## <font color="red">1.Data Binding框架MVVM</font> 
 
 
-参考资料
+##### 参考资料
 
 * <a target="_blank" href="https://developer.android.com/topic/libraries/data-binding/index.html">https://developer.android.com/topic/libraries/data-binding/index.html</a>
 
@@ -32,6 +32,8 @@ android {
 ```
 
 <font>项目源码位置：AndroidProjects/DataBinding目录</font> 
+
+##### 效果图
 
 
 
