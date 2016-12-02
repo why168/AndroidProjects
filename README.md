@@ -32,6 +32,10 @@ android {
 }
 ```
 
+##### 效果图
+![DataBinding-art](https://raw.githubusercontent.com/why168/AndroidProjects/master/Art/DataBinding-art.gif)
+
+
 ##### 示例代码
 
 ```java
@@ -354,9 +358,6 @@ item_recycler_view.xml
     </LinearLayout>
 </layout>
 ```
-
-##### 效果图
-![DataBinding-art](https://raw.githubusercontent.com/why168/AndroidProjects/master/Art/DataBinding-art.gif)
 
 
 <br>
