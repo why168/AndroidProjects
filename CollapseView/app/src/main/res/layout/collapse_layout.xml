@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/titleRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="170px"
+        android:clickable="true"
+        android:padding="30px">
+
+        <TextView
+            android:id="@+id/numberTextView"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circle_textview"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="#EBEFEC"
+            android:textSize="35px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:layout_toRightOf="@id/numberTextView"
+            android:clickable="false"
+            android:text="This is title"
+            android:textColor="#1d953f"
+            android:textSize="46px" />
+
+
+        <ImageView
+            android:id="@+id/arrowImageView"
+            android:layout_width="48px"
+            android:layout_height="27px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_an_xxh"
+            android:clickable="false"
+            android:scaleType="fitCenter" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@id/titleRelativeLayout"
+        android:background="#E7E7EF"
+        android:clickable="false" />
+
+    <RelativeLayout
+        android:id="@+id/contentRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+</LinearLayout>
