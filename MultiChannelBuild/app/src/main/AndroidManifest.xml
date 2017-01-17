@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.github.why168.multichannelbuild">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+        <meta-data
+            android:name="Multi_CHANNEL"
+            android:value="${CHANNEL_NAME}" />
+
+        <meta-data
+            android:name="PUSH_APP_ID"
+            android:value="${APP_ID}" />
+        <meta-data
+            android:name="PUSH_APP_KEY"
+            android:value="${APP_KEY}" />
+
+
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

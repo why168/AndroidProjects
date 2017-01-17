@@ -3,7 +3,8 @@
 	1. Data Binding框架MVVM
 	2. BaseView
 	3. CollapseView
-	5. Notification
+	4. Notification
+	5. MultiChannelBuild
 	6. 更新中...
 		
 
@@ -722,14 +723,142 @@ PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
         NotificationManagerCompat.from(getApplicationContext()).notify(count, mBuilder.build());
 ```
 
-## 5.更新中...
-### 参考资料
-* <a target="_blank" href=""></a>
+## 5.MultiChannelBuild
 
-### 效果图
+<font>项目源码位置：AndroidProjects/MultiChannelBuild目录</font> 
+
+### 介绍
+* Gradle多渠道打包
+* Gradle对生成APK名称重命名
+* Gradle签名配置
+* Gradle支持lambda
+* Gralde编译JDK1.8
+* Gradle存储库maven仓库设置
 
 ### 示例代码
+```groovy
+apply plugin: 'com.android.application'
 
+android {
+    //apk签名脚本
+    signingConfigs {
+        config {
+            keyAlias 'Edwin'
+            keyPassword 'Edwin666666'
+            storeFile file('./AppKeyStore.jks')
+            storePassword '666666'
+        }
+    }
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.github.why168.multichannelbuild"
+        minSdkVersion 11
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        //支持lambda
+        jackOptions {
+            enabled true
+        }
+
+        //类似下面productFlavors
+        manifestPlaceholders = [
+                APP_ID : "APP_ID111111",
+                APP_KEY: "APP_KEY222222",
+        ]
+
+        //ndk编译
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            minifyEnabled false   //混淆
+            shrinkResources false //去除无效的资源文件
+            zipAlignEnabled false //Zipalign优化
+            signingConfig signingConfigs.config
+        }
+        release {
+            debuggable false
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            minifyEnabled true   //混淆
+            shrinkResources true //去除无效的资源文件
+            zipAlignEnabled true //Zipalign优化
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+    //源设置
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    //多渠道配置，下面的关键字'CHANNEL_NAME'与AndroidManifest里面必须一致。
+    productFlavors {
+        baidu {//百度市场
+            manifestPlaceholders = [CHANNEL_NAME: 500001];
+        }
+        yingyongbai {//腾讯应用市场
+            manifestPlaceholders = [CHANNEL_NAME: 500002];
+        }
+        xiaomi {//小米应用市场
+            manifestPlaceholders = [CHANNEL_NAME: 500003];
+        }
+        store360 {//360商店
+            manifestPlaceholders = [CHANNEL_NAME: 500004];
+        }
+    }
+    //apk名字自定义
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def file = output.outputFile
+            output.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+        }
+    }
+    //JDK1.8编译选项
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //存储库maven仓库设置
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:25.1.0'
+}
+
+```
+## 6.更新中...
+<font>项目源码位置：AndroidProjects/xx目录</font> 
+
+### 介绍
+### 参考资料
+### 效果图
+### 示例代码
 
 <br>
 <br>
