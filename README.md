@@ -752,6 +752,8 @@ PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
 
 #### Gradle注意事项
 
+* linux下使用./gradlew 
+* windows下使用gradlew
 * 打包后的apk文件在app–>build–>outputs—>apk
 * 使用gradlew时可能出现没有找到该命令,需要chmod 755 gradlew
 
@@ -812,7 +814,7 @@ android {
         ]
 
         /**
-         * JDK1.8编译选项
+         * Native Development Kit
          */
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'mips'

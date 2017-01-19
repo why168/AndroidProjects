@@ -52,7 +52,7 @@ android {
         ]
 
         /**
-         * JDK1.8编译选项
+         * Native Development Kit
          */
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'mips'
