@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
-    //apk签名脚本
+    /**
+     * apk签名脚本
+     */
     signingConfigs {
         config {
             keyAlias 'Edwin'
@@ -10,29 +12,50 @@ android {
             storePassword '666666'
         }
     }
+    /**
+     * 自定义包名
+     */
+    def pageName = "com.github.why168.multichannelbuild"
+    /**
+     * 自定义名字
+     */
+    def appName = "MultiChannelBuild"
+    /**
+     * 自定义Logo
+     */
+    def appLogo = "@mipmap/ic_launcher"
+
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.github.why168.multichannelbuild"
+        applicationId pageName
         minSdkVersion 11
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
-        //支持lambda
+        /**
+         * 支持lambda
+         */
         jackOptions {
             enabled true
         }
 
-        //类似下面productFlavors
+        /**
+         * 类似下面productFlavors
+         */
         manifestPlaceholders = [
-                APP_ID : "APP_ID111111",
-                APP_KEY: "APP_KEY222222",
+                APP_ID  : "APP_ID111111",
+                APP_KEY : "APP_KEY222222",
+                APP_NAME: appName,
+                APP_LOGO: appLogo
         ]
 
-        //ndk编译
+        /**
+         * JDK1.8编译选项
+         */
         ndk {
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'mips'
         }
     }
     buildTypes {
@@ -47,23 +70,27 @@ android {
         release {
             debuggable false
             buildConfigField "boolean", "LOG_DEBUG", "false"
-            minifyEnabled true   //混淆
-            shrinkResources true //去除无效的资源文件
-            zipAlignEnabled true //Zipalign优化
+            minifyEnabled true
+            shrinkResources false
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
     }
-    //源设置
+    /**
+     * 源设置
+     */
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
         }
     }
-    //多渠道配置，下面的关键字'CHANNEL_NAME'与AndroidManifest里面必须一致。
+    /**
+     * 多渠道配置，下面的关键字'CHANNEL_NAME'与AndroidManifest里面必须一致。
+     */
     productFlavors {
         baidu {//百度市场
-            manifestPlaceholders = [CHANNEL_NAME: 500001];
+            manifestPlaceholders = [CHANNEL_NAME: 500001]
         }
         yingyongbai {//腾讯应用市场
             manifestPlaceholders = [CHANNEL_NAME: 500002];
@@ -74,28 +101,43 @@ android {
         store360 {//360商店
             manifestPlaceholders = [CHANNEL_NAME: 500004];
         }
-    }
-    //apk名字自定义
-    android.applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def file = output.outputFile
-            output.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+        store360 {//360商店
+            manifestPlaceholders = [CHANNEL_NAME: 500005];
         }
     }
-    //JDK1.8编译选项
+    /**
+     * apk名字自定义
+     */
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            def releaseTime = new Date().format("yyyy-MM-dd HH:MM", TimeZone.getTimeZone("UTC"))
+            def fileName = outputFile.name.replace(".apk", "-V" + defaultConfig.versionName + "_" + releaseTime + ".apk")
+            output.outputFile = new File(outputFile.parent, fileName)
+
+        }
+    }
+    /**
+     * JDK1.8编译选项
+     */
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    //存储库maven仓库设置
+    /**
+     * 存储库maven仓库设置
+     */
     repositories {
         flatDir {
             dirs 'libs'
         }
+        mavenCentral()
         jcenter()
         maven { url "https://jitpack.io" }
     }
-
+    /**
+     * 移除lint检测的error
+     */
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -106,8 +148,8 @@ android {
         useNewCruncher = false
     }
 }
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'top.zibin:Luban:1.0.8'
 }

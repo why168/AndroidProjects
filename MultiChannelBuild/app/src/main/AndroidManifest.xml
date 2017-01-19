@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.github.why168.multichannelbuild">
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="${APP_LOGO}"
+        android:label="${APP_NAME}"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        tools:replace="android:label,android:icon,android:theme">
 
         <meta-data
             android:name="Multi_CHANNEL"
@@ -22,8 +23,9 @@
             android:value="${APP_KEY}" />
 
 
-
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:label="${APP_NAME}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
