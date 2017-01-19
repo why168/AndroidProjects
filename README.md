@@ -832,7 +832,7 @@ android {
             buildConfigField "boolean", "LOG_DEBUG", "false"
             minifyEnabled true
             shrinkResources false
-            zipAlignEnabled true 
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
@@ -861,7 +861,7 @@ android {
         store360 {//360商店
             manifestPlaceholders = [CHANNEL_NAME: 500004];
         }
-        store360 {//360商店
+        anzhi {//安智市场
             manifestPlaceholders = [CHANNEL_NAME: 500005];
         }
     }
@@ -911,7 +911,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'top.zibin:Luban:1.0.8'
 }
 ```
 ## 6.更新中...
