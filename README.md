@@ -736,6 +736,26 @@ PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
 * Gralde编译JDK1.8
 * Gradle存储库maven仓库设置
 
+### Gradle常见命令
+
+* ./gradlew clean：清理删除build文件夹
+* ./gradlew build：检查依赖并编译打包debug和release版本
+* ./gradlew -v：版本号
+* ./gradlew assembleRelease：打包所有渠道release版本 
+* ./gradlew assembleBaiduRelease：打某个渠道的release版本 
+* ./gradlew assembleDebug：打包所有渠道debug版本 
+* ./gradlew assembleDebug：打某个渠道的debug版本 
+* ./gradlew installRelease：打包并安装Release模式包
+	* ./gradlew installBaiduRelease：同上
+* ./gradlew uninstallRelease：卸载Release模式包
+	* ./gradlew uninstallBaiduRelease：同上
+
+#### Gradle注意事项
+
+* 打包后的apk文件在app–>build–>outputs—>apk
+* 使用gradlew时可能出现没有找到该命令,需要chmod 755 gradlew
+
+
 ### 示例代码
 ```groovy
 apply plugin: 'com.android.application'
