@@ -1,16 +1,16 @@
 # AndroidProjects
 * **个人总结归纳-目录大纲**
-	1. Data Binding框架MVVM
-	2. BaseView
-	3. CollapseView
-	4. Notification
-	5. MultiChannelBuild
-	6. 更新中...
+	1. [Data Binding框架MVVM](#1)
+	2. [BaseView](#2)
+	3. [CollapseView](#3)
+	4. [Notification](#4)
+	5. [MultiChannelBuild](#5)
+	6. [更新中...](#6)
 		
 
 
 
-## 1.Data Binding框架MVVM
+## <span id="1">1.Data Binding框架MVVM</span>
 
 <font>项目源码位置：AndroidProjects/DataBinding目录</font> 
 
@@ -379,7 +379,7 @@ item_recycler_view.xml
 ```
 
 
-## 2. BaseView
+## 2. <span id="2">BaseView</span>
 
 <font>项目源码位置：AndroidProjects/BaseView目录</font> 
 
@@ -464,7 +464,7 @@ public class MainActivity extends AppCompatActivity implements OnRowClickListene
     }
 }
 ```
-## 3.CollapseView
+## 3.<span id="3">CollapseView</span>
 
 <font>项目源码位置：AndroidProjects/CollapseView目录</font> 
 
@@ -648,7 +648,7 @@ public class CollapseView extends LinearLayout {
     }
 }
 ```
-## 4.Notification
+## 4.<span id="4">Notification</span>
 
 <font>项目源码位置：AndroidProjects/Notification目录</font> 
 
@@ -723,7 +723,7 @@ PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
         NotificationManagerCompat.from(getApplicationContext()).notify(count, mBuilder.build());
 ```
 
-## 5.MultiChannelBuild
+## 5.<span id="5">MultiChannelBuild</span>
 
 <font>项目源码位置：AndroidProjects/MultiChannelBuild目录</font> 
 
@@ -913,7 +913,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
 }
 ```
-## 6.更新中...
+## <span id="6">6.更新中...</span>
 <font>项目源码位置：AndroidProjects/xx目录</font> 
 
 ### 介绍
