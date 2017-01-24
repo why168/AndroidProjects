@@ -147,6 +147,17 @@ android {
         cruncherEnabled = false
         useNewCruncher = false
     }
+    /**
+     * 关联源码到项目
+     * 在相关的module下的build.gradle中配置
+     */
+    sourceSets {
+        main {
+            java {
+                srcDirs += '源码在本地的绝对路径'
+            }
+        }
+    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
