@@ -916,6 +916,14 @@ dependencies {
 }
 ```
 ## <span id="6">6.更新中...</span>
+<font>项目源码位置：AndroidProjects/SwipeBack目录</font> 
+
+### 介绍
+### 参考资料
+### 效果图
+### 示例代码
+
+## <span id="6">7.更新中...</span>
 <font>项目源码位置：AndroidProjects/xx目录</font> 
 
 ### 介绍
