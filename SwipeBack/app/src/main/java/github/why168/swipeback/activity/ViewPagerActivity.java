@@ -59,22 +59,6 @@ public class ViewPagerActivity extends BaseActivity implements OnBannerItemClick
         });//设置图片加载&自定义图片监听
         mLoopViewPagerLayout.setOnBannerItemClickListener(this);//设置监听
         mLoopViewPagerLayout.setLoopData(bannerInfos);//设置数据
-        mLoopViewPagerLayout.getLoopViewPager().addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-
-                //TODO 1.position % bannerInfos.size(); 这句话是因为的这个LoopViewPagerLayout框架是无限轮播,所以写了这个句话。
-                int i = position % bannerInfos.size();
-                Log.e("Edwin", "i = " + i);
-                //ViewPager滑动冲突解决
-                mSwipeBackHelper.setSwipeBackEnable(i == 0);
-
-                //TODO 2.正常解决冲突这样写
-//                mSwipeBackHelper.setSwipeBackEnable(position == 0);
-
-            }
-        });
     }
 
     @Override
