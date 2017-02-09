@@ -747,7 +747,7 @@ PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
 * ./gradlew assembleRelease：打包所有渠道release版本
 * ./gradlew assembleBaiduRelease：打某个渠道的release版本
 * ./gradlew assembleDebug：打包所有渠道debug版本
-* ./gradlew assembleDebug：打某个渠道的debug版本
+* ./gradlew assembleBaiduDebug：打某个渠道的debug版本
 * ./gradlew installRelease：打包并安装Release模式包
 	* ./gradlew installBaiduRelease：同上
 * ./gradlew uninstallRelease：卸载Release模式包
@@ -775,6 +775,7 @@ android {
             keyPassword 'Edwin666666'
             storeFile file('./AppKeyStore.jks')
             storePassword '666666'
+            v2SigningEnabled false //Android 7.0 中新增了 APK Signature Scheme v2 签名方式
         }
     }
     /**
