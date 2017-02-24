@@ -1,47 +1,86 @@
 package github.why168.handlercourse;
 
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ImageView;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Handler 教程
+ * https://developer.android.com/training/multiple-threads/communicate-ui.html#Handler
+ * <p>
+ * https://developer.android.com/reference/android/os/Handler.html
+ * <p>
+ * http://mp.weixin.qq.com/s/eDjFF-zAr6STaJ7hKhIoDA
+ * <p>
+ * http://www.cnblogs.com/yw-ah/p/5830458.html
+ * <p>
+ * http://blog.csdn.net/wuleihenbang/article/details/17126371
  *
  * @author Edwin.Wu
  * @version 2017/2/23 19:06
  * @since JDK1.8
  */
 public class MainActivity extends AppCompatActivity {
+    private ImageView main_image_view;
+    private Bitmap bitmapObject;
+
+    static class MyHandler extends Handler {
+        private WeakReference<MainActivity> activityWeakReference;
+
+        public MyHandler(MainActivity activity) {
+            activityWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            MainActivity activity = activityWeakReference.get();
+            switch (msg.what) {
+                case 0:
+                    activity.main_image_view.setImageResource(R.mipmap.ic_launcher);
+                    break;
+            }
+
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        main_image_view = (ImageView) findViewById(R.id.main_image_view);
+
+
+        bitmapObject = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        main_image_view.setImageBitmap(bitmapObject);
+
+
+        boolean isUiThread = Looper.getMainLooper().getThread() == Thread.currentThread();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            boolean isUiThreadNew = Looper.getMainLooper().isCurrentThread();
+        }
+
     }
-    /**
-     *
-     * https://developer.android.com/reference/android/os/Handler.html
-     *
-     * https://developer.android.com/training/multiple-threads/communicate-ui.html#Handler
-     *
-     *
-     * getMainLooper（）
 
-     返回应用程序的主循环，它存在于应用程序的主线程中。
-     myLooper（）
-
-     返回与当前线程相关联的Looper对象。如果调用线程没有与Looper关联，则返回null。
-     至于getMainLooper（）是否有任何用途，我可以向你保证它真的是。如果你在后台线程上做一些代码，并想在UI线程上执行代码，例如更新UI，请使用以下代码：
-
-     new Handler(Looper.getMainLooper()).post(new Runnable() {
-     // execute code that must be run on UI thread
-     });
-     当然，还有其他方法实现。
-
-     另一个用法是，如果你想检查当前执行的代码是否正在UI线程上运行，例如你想throw / assert：
-
-     boolean isUiThread = Looper.getMainLooper().getThread() == Thread.currentThread();
-     要么
-
-     boolean isUiThread = Looper.getMainLooper().isCurrentThread();
-     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (bitmapObject != null && !bitmapObject.isRecycled()) {
+            bitmapObject.recycle();
+            main_image_view.setImageBitmap(null);
+            System.gc();
+            Log.e("Edwin", "GC");
+        }
+    }
 }
