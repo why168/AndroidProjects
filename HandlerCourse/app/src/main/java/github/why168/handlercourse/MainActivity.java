@@ -21,6 +21,8 @@ import java.lang.ref.WeakReference;
  * http://mp.weixin.qq.com/s/eDjFF-zAr6STaJ7hKhIoDA
  * <p>
  * http://www.cnblogs.com/yw-ah/p/5830458.html
+ * <p>
+ * http://blog.csdn.net/wuleihenbang/article/details/17126371
  *
  * @author Edwin.Wu
  * @version 2017/2/23 19:06
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             //TODO 处理消息
-
+            Log.e("Edwin", "mHandler2---->currentThread:  " + Thread.currentThread());
             if (msg.what == 1)
                 Log.e("Edwin", "msg = " + msg.obj);
 
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 子线程中用Handler的方法一
+     * 自定义与线程相关的Handler
      */
     class LooperThread1 extends Thread {
         public Handler mHandler;
@@ -135,18 +138,22 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void handleMessage(Message msg) {
                     super.handleMessage(msg);
-                    if (msg.what == 5)
-                        Log.e("Edwin", "ok");
+                    Log.e("Edwin", "LooperThread1---->currentThread:  " + Thread.currentThread());
                 }
             };
-            Looper.loop();
 
-            mHandler.sendEmptyMessage(5);
+            mHandler.sendEmptyMessage(1);
+            Looper.loop();
+            // TODO: 2017/2/27 Loop后面不能执行了
+            mHandler.sendEmptyMessage(1);
+            mHandler.sendEmptyMessage(1);
+            mHandler.sendEmptyMessage(1);
         }
     }
 
     /**
      * 子线程中用Handler的方法二
+     * 自定义与线程相关的Handler
      */
     class LooperThread2 extends Thread {
         public Handler mHandler;
@@ -159,12 +166,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void handleMessage(Message msg) {
                     super.handleMessage(msg);
-                    if (msg.what == 5)
-                        Log.e("Edwin", "ok");
+                    Log.e("Edwin", "LooperThread2 ok");
                 }
             };
 
-            mHandler.sendEmptyMessage(5);
+            mHandler.sendEmptyMessage(1);
         }
     }
 
