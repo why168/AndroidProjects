@@ -21,8 +21,6 @@ import java.lang.ref.WeakReference;
  * http://mp.weixin.qq.com/s/eDjFF-zAr6STaJ7hKhIoDA
  * <p>
  * http://www.cnblogs.com/yw-ah/p/5830458.html
- * <p>
- * http://blog.csdn.net/wuleihenbang/article/details/17126371
  *
  * @author Edwin.Wu
  * @version 2017/2/23 19:06
@@ -31,11 +29,14 @@ import java.lang.ref.WeakReference;
 public class MainActivity extends AppCompatActivity {
     private ImageView main_image_view;
     private Bitmap bitmapObject;
+    private final MyHandler mHandler = new MyHandler(this);
+    private static int count = 0;
 
-    static class MyHandler extends Handler {
+    private static class MyHandler extends Handler {
         private WeakReference<MainActivity> activityWeakReference;
 
-        public MyHandler(MainActivity activity) {
+        private MyHandler(MainActivity activity) {
+            super();
             activityWeakReference = new WeakReference<>(activity);
         }
 
@@ -43,15 +44,20 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             MainActivity activity = activityWeakReference.get();
-            switch (msg.what) {
-                case 0:
-                    activity.main_image_view.setImageResource(R.mipmap.ic_launcher);
-                    break;
+            if (activity != null) {
+                switch (msg.what) {
+                    case 0:
+                        activity.main_image_view.setImageResource(R.mipmap.ic_launcher);
+                        break;
+                    case 100:
+                        count++;
+                        Log.e("Edwin", "count = " + count);
+                        break;
+                }
             }
 
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
         main_image_view = (ImageView) findViewById(R.id.main_image_view);
 
-
         bitmapObject = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         main_image_view.setImageBitmap(bitmapObject);
 
@@ -68,14 +73,107 @@ public class MainActivity extends AppCompatActivity {
         boolean isUiThread = Looper.getMainLooper().getThread() == Thread.currentThread();
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            boolean isUiThreadNew = Looper.getMainLooper().isCurrentThread();
+            isUiThread = Looper.getMainLooper().isCurrentThread();
         }
+        Log.e("Edwin", "isUiThread = " + isUiThread);
 
+        Message message = mHandler2.obtainMessage();
+        message.what = 1;
+        message.obj = 100;
+        message.setTarget(mHandler2);
+        message.sendToTarget();
+
+        Message message2 = mHandler2.obtainMessage();
+        message2.what = 0;
+        message2.obj = 200;
+        message2.sendToTarget();
+
+
+        new LooperThread1().start();
+        new LooperThread2().start();
+
+//        Activity
     }
+
+    Handler mHandler2 = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            //TODO 拦截消息，包装修改，再返回给上面
+            int what = msg.what;
+            if (what == 1) {
+                msg.obj = "win";
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            //TODO 处理消息
+
+            if (msg.what == 1)
+                Log.e("Edwin", "msg = " + msg.obj);
+
+        }
+    };
+
+
+    /**
+     * 子线程中用Handler的方法一
+     */
+    class LooperThread1 extends Thread {
+        public Handler mHandler;
+
+        @Override
+        public void run() {
+            super.run();
+
+            Looper.prepare();
+            mHandler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    if (msg.what == 5)
+                        Log.e("Edwin", "ok");
+                }
+            };
+            Looper.loop();
+
+            mHandler.sendEmptyMessage(5);
+        }
+    }
+
+    /**
+     * 子线程中用Handler的方法二
+     */
+    class LooperThread2 extends Thread {
+        public Handler mHandler;
+
+        @Override
+        public void run() {
+            super.run();
+
+            mHandler = new Handler(Looper.getMainLooper()) {
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    if (msg.what == 5)
+                        Log.e("Edwin", "ok");
+                }
+            };
+
+            mHandler.sendEmptyMessage(5);
+        }
+    }
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+
         if (bitmapObject != null && !bitmapObject.isRecycled()) {
             bitmapObject.recycle();
             main_image_view.setImageBitmap(null);
