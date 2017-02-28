@@ -138,16 +138,17 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void handleMessage(Message msg) {
                     super.handleMessage(msg);
-                    Log.e("Edwin", "LooperThread1---->currentThread:  " + Thread.currentThread());
+                    Log.e("Edwin", "LooperThread1---->what = " + msg.what + " ,currentThread:  " + Thread.currentThread());
                 }
             };
 
             mHandler.sendEmptyMessage(1);
             Looper.loop();
             // TODO: 2017/2/27 Loop后面不能执行了
-            mHandler.sendEmptyMessage(1);
-            mHandler.sendEmptyMessage(1);
-            mHandler.sendEmptyMessage(1);
+            mHandler.sendEmptyMessage(2);
+            mHandler.sendEmptyMessage(3);
+            mHandler.sendEmptyMessage(4);
+            Looper.loop();
         }
     }
 
@@ -173,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
             mHandler.sendEmptyMessage(1);
         }
     }
+
 
 
     @Override
