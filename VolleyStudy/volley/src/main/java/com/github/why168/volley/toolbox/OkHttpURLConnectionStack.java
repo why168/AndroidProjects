@@ -13,7 +13,6 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -48,22 +47,17 @@ public class OkHttpURLConnectionStack implements HttpStack {
 
     @Override
     public HttpResponse performRequest(Request<?> request, Map<String, String> additionalHeaders) throws IOException, AuthFailureError {
-        OkHttpClient.Builder builder = mClient.newBuilder();
-
         int timeoutMs = request.getTimeoutMs();
-        builder.connectTimeout(timeoutMs, TimeUnit.MILLISECONDS);
-        builder.readTimeout(timeoutMs, TimeUnit.MILLISECONDS);
-        builder.writeTimeout(timeoutMs, TimeUnit.MILLISECONDS);
+        OkHttpClient client = mClient.newBuilder()
+                .connectTimeout(timeoutMs, TimeUnit.MILLISECONDS)
+                .readTimeout(timeoutMs, TimeUnit.MILLISECONDS)
+                .writeTimeout(timeoutMs, TimeUnit.MILLISECONDS).build();
 
-        String url = request.getUrl();
         HashMap<String, String> map = new HashMap<String, String>();
         map.putAll(request.getHeaders());
         map.putAll(additionalHeaders);
 
-        URL parsedUrl = new URL(url);
-
         okhttp3.Request.Builder okHttpRequestBuilder = new okhttp3.Request.Builder();
-        okHttpRequestBuilder.url(parsedUrl);
 
         for (String headerName : map.keySet()) {
             okHttpRequestBuilder.addHeader(headerName, map.get(headerName));
@@ -72,26 +66,22 @@ public class OkHttpURLConnectionStack implements HttpStack {
         for (final String name : additionalHeaders.keySet()) {
             okHttpRequestBuilder.addHeader(name, additionalHeaders.get(name));
         }
-
         setConnectionParametersForRequest(okHttpRequestBuilder, request);
 
-        okhttp3.Request build = okHttpRequestBuilder.build();
-        Call okHttpCall = mClient.newCall(build);
+        okhttp3.Request okHttpRequest = okHttpRequestBuilder.url(request.getUrl()).build();
+        Call okHttpCall = client.newCall(okHttpRequest);
         Response okHttpResponse = okHttpCall.execute();
         StatusLine responseStatus = new BasicStatusLine(
                 parseProtocol(okHttpResponse.protocol()),
                 okHttpResponse.code(),
-                okHttpResponse.message()
-        );
+                okHttpResponse.message());
 
         BasicHttpResponse response = new BasicHttpResponse(responseStatus);
         response.setEntity(entityFromOkHttpResponse(okHttpResponse));
 
         Headers responseHeaders = okHttpResponse.headers();
-
         for (int i = 0, len = responseHeaders.size(); i < len; i++) {
             final String name = responseHeaders.name(i), value = responseHeaders.value(i);
-
             if (name != null) {
                 response.addHeader(new BasicHeader(name, value));
             }
