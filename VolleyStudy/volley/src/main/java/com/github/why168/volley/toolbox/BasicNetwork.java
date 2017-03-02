@@ -71,6 +71,7 @@ public class BasicNetwork implements Network {
     public BasicNetwork(HttpStack httpStack) {
         // If a pool isn't passed in, then build a small default pool that will give us a lot of
         // benefit and not use too much memory.
+        // 如果池没有传入,然后构建一个小型默认池,将给我们很多好处,不要使用太多的内存。
         this(httpStack, new ByteArrayPool(DEFAULT_POOL_SIZE));
     }
 
@@ -135,8 +136,7 @@ public class BasicNetwork implements Network {
                 if (statusCode < 200 || statusCode > 299) {
                     throw new IOException();
                 }
-                return new NetworkResponse(statusCode, responseContents, responseHeaders, false,
-                        SystemClock.elapsedRealtime() - requestStart);
+                return new NetworkResponse(statusCode, responseContents, responseHeaders, false, SystemClock.elapsedRealtime() - requestStart);
             } catch (SocketTimeoutException e) {
                 attemptRetryOnException("socket", request, new TimeoutError());
             } catch (ConnectTimeoutException e) {
@@ -183,8 +183,7 @@ public class BasicNetwork implements Network {
     /**
      * Logs requests that took over SLOW_REQUEST_THRESHOLD_MS to complete.
      */
-    private void logSlowRequests(long requestLifetime, Request<?> request,
-                                 byte[] responseContents, StatusLine statusLine) {
+    private void logSlowRequests(long requestLifetime, Request<?> request, byte[] responseContents, StatusLine statusLine) {
         if (DEBUG || requestLifetime > SLOW_REQUEST_THRESHOLD_MS) {
             VolleyLog.d("HTTP response for request=<%s> [lifetime=%d], [size=%s], " +
                             "[rc=%d], [retryCount=%s]", request, requestLifetime,
@@ -207,8 +206,7 @@ public class BasicNetwork implements Network {
         try {
             retryPolicy.retry(exception);
         } catch (VolleyError e) {
-            request.addMarker(
-                    String.format("%s-timeout-giveup [timeout=%s]", logPrefix, oldTimeout));
+            request.addMarker(String.format("%s-timeout-giveup [timeout=%s]", logPrefix, oldTimeout));
             throw e;
         }
         request.addMarker(String.format("%s-retry [timeout=%s]", logPrefix, oldTimeout));
@@ -239,8 +237,7 @@ public class BasicNetwork implements Network {
      * Reads the contents of HttpEntity into a byte[].
      */
     private byte[] entityToBytes(HttpEntity entity) throws IOException, ServerError {
-        PoolingByteArrayOutputStream bytes =
-                new PoolingByteArrayOutputStream(mPool, (int) entity.getContentLength());
+        PoolingByteArrayOutputStream bytes = new PoolingByteArrayOutputStream(mPool, (int) entity.getContentLength());
         byte[] buffer = null;
         try {
             InputStream in = entity.getContent();

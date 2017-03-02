@@ -24,11 +24,15 @@ import java.util.concurrent.Executor;
  * Delivers responses and errors.
  */
 public class ExecutorDelivery implements ResponseDelivery {
-    /** Used for posting responses, typically to the main thread. */
+    /**
+     * Used for posting responses, typically to the main thread.
+     */
     private final Executor mResponsePoster;
 
     /**
      * Creates a new response delivery interface.
+     * 创建一个新的响应交付界面。
+     *
      * @param handler {@link Handler} to post responses on
      */
     public ExecutorDelivery(final Handler handler) {
@@ -44,6 +48,7 @@ public class ExecutorDelivery implements ResponseDelivery {
     /**
      * Creates a new response delivery interface, mockable version
      * for testing.
+     *
      * @param executor For running delivery tasks
      */
     public ExecutorDelivery(Executor executor) {
@@ -113,6 +118,6 @@ public class ExecutorDelivery implements ResponseDelivery {
             if (mRunnable != null) {
                 mRunnable.run();
             }
-       }
+        }
     }
 }

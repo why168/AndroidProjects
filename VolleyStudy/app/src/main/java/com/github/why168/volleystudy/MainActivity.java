@@ -1,17 +1,26 @@
 package com.github.why168.volleystudy;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.android.internal.http.multipart.FilePart;
+import com.android.internal.http.multipart.Part;
+import com.android.internal.http.multipart.StringPart;
 import com.github.why168.volley.Request;
 import com.github.why168.volley.RequestQueue;
 import com.github.why168.volley.Response;
 import com.github.why168.volley.VolleyError;
+import com.github.why168.volley.toolbox.MultipartRequest;
 import com.github.why168.volley.toolbox.OkApacheClientStack;
 import com.github.why168.volley.toolbox.OkHttpURLConnectionStack;
 import com.github.why168.volley.toolbox.StringRequest;
 import com.github.why168.volley.toolbox.Volley;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.apache.OkApacheClient;
@@ -41,10 +50,11 @@ public class MainActivity extends AppCompatActivity {
                 .addInterceptor(logging)
                 .build();
 
-        HttpRequest$1();
-        HttpRequest$2();
-        HttpRequest$3();
+//        HttpRequest$1();
+//        HttpRequest$2();
+//        HttpRequest$3();
 
+        MultipartRequest$4();
     }
 
 
@@ -82,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         queue.add(initializedRequest());
     }
 
-
     Request initializedRequest() {
         return new StringRequest(Request.Method.GET,
                 "http://www.aybrowser.com/sdk/partners/",
@@ -98,5 +107,50 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("Edwin", "VolleyError = " + error);
                     }
                 });
+    }
+
+    /**
+     * post请求
+     * 多类型上传
+     * 文件+字符
+     */
+    void MultipartRequest$4() {
+        try {
+            //构造参数列表
+            List<Part> partList = new ArrayList<Part>();
+            partList.add(new StringPart("username", "edwin"));
+            partList.add(new StringPart("email", "edwin.wu@gmail.com"));
+
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ic_launcher.png";
+            partList.add(new FilePart("ic_launcher", new File(path)));
+
+            //获取队列
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            String url = "http://www.cnblogs.com/";
+            //生成请求
+            MultipartRequest profileUpdateRequest = new MultipartRequest(url,
+                    partList.toArray(new Part[partList.size()]),
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.e("Edwin", "onResponse : " + response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("Edwin", "MultipartRequest : " + error.getMessage(), error);
+                        }
+                    }) {
+                @Override
+                public String getBodyContentType() {
+                    return super.getBodyContentType();
+                }
+
+            };
+            requestQueue.add(profileUpdateRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -22,40 +22,58 @@ import java.util.concurrent.BlockingQueue;
 
 /**
  * Provides a thread for performing cache triage on a queue of requests.
- *
+ * <p>
  * Requests added to the specified cache queue are resolved from cache.
  * Any deliverable response is posted back to the caller via a
  * {@link ResponseDelivery}.  Cache misses and responses that require
  * refresh are enqueued on the specified network queue for processing
  * by a {@link NetworkDispatcher}.
+ * <p>
+ * 提供了一个线程用于执行缓存分诊的请求队列上。
+ * <p>
+ * 请求添加到指定的缓存队列解决从缓存。
+ * 任何交付响应发布返回给调用者通过
+ * { @link ResponseDelivery }。缓存未命中和响应要求
+ * 刷新网络上指定的队列进行处理
+ * 由{ @link NetworkDispatcher }。
  */
 public class CacheDispatcher extends Thread {
 
     private static final boolean DEBUG = VolleyLog.DEBUG;
 
-    /** The queue of requests coming in for triage. */
+    /**
+     * The queue of requests coming in for triage.
+     */
     private final BlockingQueue<Request<?>> mCacheQueue;
 
-    /** The queue of requests going out to the network. */
+    /**
+     * The queue of requests going out to the network.
+     */
     private final BlockingQueue<Request<?>> mNetworkQueue;
 
-    /** The cache to read from. */
+    /**
+     * The cache to read from.
+     */
     private final Cache mCache;
 
-    /** For posting responses. */
+    /**
+     * For posting responses.
+     */
     private final ResponseDelivery mDelivery;
 
-    /** Used for telling us to die. */
+    /**
+     * Used for telling us to die.
+     */
     private volatile boolean mQuit = false;
 
     /**
      * Creates a new cache triage dispatcher thread.  You must call {@link #start()}
      * in order to begin processing.
      *
-     * @param cacheQueue Queue of incoming requests for triage
+     * @param cacheQueue   Queue of incoming requests for triage
      * @param networkQueue Queue to post requests that require network to
-     * @param cache Cache interface to use for resolution
-     * @param delivery Delivery interface to use for posting responses
+     * @param cache        Cache interface to use for resolution
+     * @param delivery     Delivery interface to use for posting responses
      */
     public CacheDispatcher(
             BlockingQueue<Request<?>> cacheQueue, BlockingQueue<Request<?>> networkQueue,
@@ -115,8 +133,7 @@ public class CacheDispatcher extends Thread {
 
                 // We have a cache hit; parse its data for delivery back to the request.
                 request.addMarker("cache-hit");
-                Response<?> response = request.parseNetworkResponse(
-                        new NetworkResponse(entry.data, entry.responseHeaders));
+                Response<?> response = request.parseNetworkResponse(new NetworkResponse(entry.data, entry.responseHeaders));
                 request.addMarker("cache-hit-parsed");
 
                 if (!entry.refreshNeeded()) {
