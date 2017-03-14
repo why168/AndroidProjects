@@ -15,7 +15,7 @@
 
 ### 示例代码
 
-##### 非UI线程更新UI的4中方式来了！
+##### 非UI线程更新UI的4种方式来了！
 
 ```java
 handler.sendEmptyMessage(1);
@@ -51,22 +51,23 @@ textView.post(new Runnable() {
 
 ##### HandlerThread来了！
 
-```
+```java
 private HandlerThread thread;
 
 
 thread = new HandlerThread("Handler Thread") {
-            @Override
-            protected void onLooperPrepared() {
-                super.onLooperPrepared();
-                //TODO 子线程操作
-                textView.setText("onLooperPrepared");
-            }
-        };
-        thread.start();
+    @Override
+    protected void onLooperPrepared() {
+        super.onLooperPrepared();
+        //TODO 子线程操作
+        textView.setText("onLooperPrepared");
+    }
+};
+thread.start();
 
-        handler = new MyHandler(thread.getLooper(), XActivity.this);
-        handler.sendEmptyMessage(1);
+handler = new MyHandler(thread.getLooper(), XActivity.this);
+handler.sendEmptyMessage(1);
+
 ```
 
 ##### Handler弱引用来了！

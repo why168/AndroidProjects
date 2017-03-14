@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 /**
- * 非UI线程更新UI的4中方式
+ * 非UI线程更新UI的4种方式
  *
  * @author Edwin.Wu
  * @version 2017/2/28 15:38
