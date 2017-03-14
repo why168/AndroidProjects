@@ -9,13 +9,17 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"> <!-- MainActivity,HandlerThreadActivity,FirstActivity,UpdateUIActivity -->
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ComplexActivity" />
+        <activity android:name=".FirstActivity" />
+        <activity android:name=".HandlerThreadActivity" />
+        <activity android:name=".UpdateUIActivity" />
     </application>
 
 </manifest>
