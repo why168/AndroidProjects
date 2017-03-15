@@ -1,8 +1,8 @@
 package com.github.why168.volleystudy.study;
 
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
@@ -18,9 +18,14 @@ import com.github.why168.volley.toolbox.OkApacheClientStack;
 import com.github.why168.volley.toolbox.OkHttpURLConnectionStack;
 import com.github.why168.volley.toolbox.StringRequest;
 import com.github.why168.volley.toolbox.Volley;
+import com.github.why168.volley.toolbox.XMLRequest;
 import com.github.why168.volleystudy.R;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +108,6 @@ public class RequestActivity extends AppCompatActivity {
         queue.add(initializedRequest("HttpRequest$3"));
     }
 
-
     /**
      * 请求方式四：
      * 多类型上传(文件+字符)
@@ -146,5 +150,45 @@ public class RequestActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 请求方式五：
+     * XMLRequest
+     */
+    public void HttpRequest$5(View view) {
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        XMLRequest xmlRequest = new XMLRequest(
+                "http://flash.weather.com.cn/wmaps/xml/china.xml",
+                new Response.Listener<XmlPullParser>() {
+                    @Override
+                    public void onResponse(XmlPullParser response) {
+                        try {
+                            int eventType = response.getEventType();
+                            while (eventType != XmlPullParser.END_DOCUMENT) {
+                                switch (eventType) {
+                                    case XmlPullParser.START_TAG:
+                                        String nodeName = response.getName();
+                                        if ("city".equals(nodeName)) {
+                                            String pName = response.getAttributeValue(0);
+                                            Log.d("Edwin", "pName is " + pName);
+                                        }
+                                        break;
+                                }
+                                eventType = response.next();
+                            }
+                        } catch (XmlPullParserException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Edwin", error.getMessage(), error);
+            }
+        });
+        mQueue.add(xmlRequest);
     }
 }

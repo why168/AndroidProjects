@@ -10,6 +10,7 @@
 	* JsonObjectRequest
 	* ClearCacheRequest
 * 对Volley扩展的Request
+    * XMLRequest
 	* JsonArrayRequest
 	* MultipartRequest
 	* GsonRequest

@@ -34,4 +34,11 @@
         android:text="请求方式四：\n多类型上传(文件+字符)"
         android:textAllCaps="false" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="HttpRequest$5"
+        android:text="请求方式五：\nXMLRequest"
+        android:textAllCaps="false" />
+
 </LinearLayout>
