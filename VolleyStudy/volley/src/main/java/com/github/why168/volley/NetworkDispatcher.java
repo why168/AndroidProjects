@@ -26,36 +26,45 @@ import java.util.concurrent.BlockingQueue;
 
 /**
  * Provides a thread for performing network dispatch from a queue of requests.
- *
+ * 提供了一个线程用于执行网络调度队列的请求。
+ * <p>
  * Requests added to the specified queue are processed from the network via a
  * specified {@link Network} interface. Responses are committed to cache, if
  * eligible, using a specified {@link Cache} interface. Valid responses and
  * errors are posted back to the caller via a {@link ResponseDelivery}.
  */
 public class NetworkDispatcher extends Thread {
-    /** The queue of requests to service. */
+    /**
+     * The queue of requests to service.
+     */
     private final BlockingQueue<Request<?>> mQueue;
-    /** The network interface for processing requests. */
+    /**
+     * The network interface for processing requests.
+     */
     private final Network mNetwork;
-    /** The cache to write to. */
+    /**
+     * The cache to write to.
+     */
     private final Cache mCache;
-    /** For posting responses and errors. */
+    /**
+     * For posting responses and errors.
+     */
     private final ResponseDelivery mDelivery;
-    /** Used for telling us to die. */
+    /**
+     * Used for telling us to die.
+     */
     private volatile boolean mQuit = false;
 
     /**
      * Creates a new network dispatcher thread.  You must call {@link #start()}
      * in order to begin processing.
      *
-     * @param queue Queue of incoming requests for triage
-     * @param network Network interface to use for performing requests
-     * @param cache Cache interface to use for writing responses to cache
+     * @param queue    Queue of incoming requests for triage
+     * @param network  Network interface to use for performing requests
+     * @param cache    Cache interface to use for writing responses to cache
      * @param delivery Delivery interface to use for posting responses
      */
-    public NetworkDispatcher(BlockingQueue<Request<?>> queue,
-            Network network, Cache cache,
-            ResponseDelivery delivery) {
+    public NetworkDispatcher(BlockingQueue<Request<?>> queue, Network network, Cache cache, ResponseDelivery delivery) {
         mQueue = queue;
         mNetwork = network;
         mCache = cache;
@@ -75,6 +84,10 @@ public class NetworkDispatcher extends Thread {
     private void addTrafficStatsTag(Request<?> request) {
         // Tag the request (if API >= 14)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+
+            // android 4.0.4的sdk DDMS中，有了一个工具：Network Traffic Tool 。
+            // 通过这个工具可以实时地监测网络的使用情况，使程序员更好的发现自己的应用程序在什么时候发送接收了多少的网络数据
+            // 从而来改进自己的应用程序来达到省电的目的。
             TrafficStats.setThreadStatsTag(request.getTrafficStatsTag());
         }
     }
@@ -99,16 +112,17 @@ public class NetworkDispatcher extends Thread {
             try {
                 request.addMarker("network-queue-take");
 
-                // If the request was cancelled already, do not perform the
-                // network request.
+                // If the request was cancelled already, do not perform the network request.
+                // 如果请求被取消了,不执行网络请求。
                 if (request.isCanceled()) {
                     request.finish("network-discard-cancelled");
                     continue;
                 }
 
+                // TrafficStats——流量统计类的范例，获取实时网速
                 addTrafficStatsTag(request);
 
-                // Perform the network request.
+                // Perform the network request. 执行网络请求。
                 NetworkResponse networkResponse = mNetwork.performRequest(request);
                 request.addMarker("network-http-complete");
 

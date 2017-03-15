@@ -29,7 +29,6 @@ import okhttp3.apache.OkApacheClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
- *
  * 请求方式
  *
  * @author Edwin.Wu

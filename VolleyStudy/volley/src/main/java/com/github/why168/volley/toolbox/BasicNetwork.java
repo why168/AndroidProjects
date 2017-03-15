@@ -195,11 +195,12 @@ public class BasicNetwork implements Network {
     /**
      * Attempts to prepare the request for a retry. If there are no more attempts remaining in the
      * request's retry policy, a timeout exception is thrown.
+     * <p>
+     * 尝试准备请求重试。如果没有其他企图剩余请求重试的政策,一个超时异常。
      *
      * @param request The request to use.
      */
-    private static void attemptRetryOnException(String logPrefix, Request<?> request,
-                                                VolleyError exception) throws VolleyError {
+    private static void attemptRetryOnException(String logPrefix, Request<?> request, VolleyError exception) throws VolleyError {
         RetryPolicy retryPolicy = request.getRetryPolicy();
         int oldTimeout = request.getTimeoutMs();
 

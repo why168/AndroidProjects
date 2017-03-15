@@ -64,8 +64,7 @@ public class RequestQueue {
      * is <em>not</em> contained in that list. Is null if no requests are staged.</li>
      * </ul>
      */
-    private final Map<String, Queue<Request<?>>> mWaitingRequests =
-            new HashMap<String, Queue<Request<?>>>();
+    private final Map<String, Queue<Request<?>>> mWaitingRequests = new HashMap<String, Queue<Request<?>>>();
 
     /**
      * The set of all requests currently being processed by this RequestQueue. A Request
@@ -77,14 +76,12 @@ public class RequestQueue {
     /**
      * The cache triage queue.
      */
-    private final PriorityBlockingQueue<Request<?>> mCacheQueue =
-            new PriorityBlockingQueue<Request<?>>();
+    private final PriorityBlockingQueue<Request<?>> mCacheQueue = new PriorityBlockingQueue<Request<?>>();
 
     /**
      * The queue of requests that are actually going out to the network.
      */
-    private final PriorityBlockingQueue<Request<?>> mNetworkQueue =
-            new PriorityBlockingQueue<Request<?>>();
+    private final PriorityBlockingQueue<Request<?>> mNetworkQueue = new PriorityBlockingQueue<Request<?>>();
 
     /**
      * Number of network request dispatcher threads to start.
@@ -116,8 +113,7 @@ public class RequestQueue {
      */
     private CacheDispatcher mCacheDispatcher;
 
-    private List<RequestFinishedListener> mFinishedListeners =
-            new ArrayList<RequestFinishedListener>();
+    private List<RequestFinishedListener> mFinishedListeners = new ArrayList<RequestFinishedListener>();
 
     /**
      * Creates the worker pool. Processing will not begin until {@link #start()} is called.
@@ -127,8 +123,7 @@ public class RequestQueue {
      * @param threadPoolSize Number of network dispatcher threads to create
      * @param delivery       A ResponseDelivery interface for posting responses and errors
      */
-    public RequestQueue(Cache cache, Network network, int threadPoolSize,
-                        ResponseDelivery delivery) {
+    public RequestQueue(Cache cache, Network network, int threadPoolSize, ResponseDelivery delivery) {
         mCache = cache;
         mNetwork = network;
         mDispatchers = new NetworkDispatcher[threadPoolSize];
@@ -143,8 +138,7 @@ public class RequestQueue {
      * @param threadPoolSize Number of network dispatcher threads to create
      */
     public RequestQueue(Cache cache, Network network, int threadPoolSize) {
-        this(cache, network, threadPoolSize,
-                new ExecutorDelivery(new Handler(Looper.getMainLooper())));
+        this(cache, network, threadPoolSize, new ExecutorDelivery(new Handler(Looper.getMainLooper())));
     }
 
     /**
@@ -167,9 +161,9 @@ public class RequestQueue {
         mCacheDispatcher.start();
 
         // Create network dispatchers (and corresponding threads) up to the pool size.
+        // 创建网络调度程序(和相应的线程)池的大小。
         for (int i = 0; i < mDispatchers.length; i++) {
-            NetworkDispatcher networkDispatcher = new NetworkDispatcher(mNetworkQueue, mNetwork,
-                    mCache, mDelivery);
+            NetworkDispatcher networkDispatcher = new NetworkDispatcher(mNetworkQueue, mNetwork, mCache, mDelivery);
             mDispatchers[i] = networkDispatcher;
             networkDispatcher.start();
         }

@@ -13,7 +13,36 @@
 	* JsonArrayRequest
 	* MultipartRequest
 	* GsonRequest
+* HttpStack
+    * HurlStack
+    * HttpClientStack
+    * OkApacheClientStack
+    * OkHttpURLConnectionStack
+
 * 实现底层HttpURLConnection替换成OkHttp
+
+* TrafficStats——流量统计类的范例，获取实时网速
+	* static long getMobileRxBytes() //获取通过Mobile连接收到的字节总数，不包含WiFi
+	* static long getMobileRxPackets() //获取Mobile连接收到的数据包总数
+	* static long getMobileTxPackets() //Mobile发送的总数据包数
+	* static long getTotalRxBytes() //获取总的接受字节数，包含Mobile和WiFi等
+	* static long getTotalRxPackets() //总的接受数据包数，包含Mobile和WiFi等
+	* static long getTotalTxBytes() //总的发送字节数，包含Mobile和WiFi等
+	* static long getTotalTxPackets() //发送的总数据包数，包含Mobile和WiFi等
+	* static long getUidRxBytes(int uid) //获取某个网络UID的接受字节数，某一个进程的总接收量
+	* static long getUidTxBytes(int uid) //获取某个网络UID的发送字节数，某一个进程的总发送量
+
+* Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);//设置线程优先级为后台，这样当多个线程并发后很多无关紧要的线程分配的CPU时间将会减少，有利于主线程的处理，有以下几种:
+	* int THREAD_PRIORITY_AUDIO //标准音乐播放使用的线程优先级
+	* int THREAD_PRIORITY_BACKGROUND //标准后台程序
+	* int THREAD_PRIORITY_DEFAULT // 默认应用的优先级
+	* int THREAD_PRIORITY_DISPLAY //标准显示系统优先级，主要是改善UI的刷新
+	* int THREAD_PRIORITY_FOREGROUND //标准前台线程优先级
+	* int THREAD_PRIORITY_LESS_FAVORABLE //低于favorable
+	* int THREAD_PRIORITY_LOWEST //有效的线程最低的优先级
+	* int THREAD_PRIORITY_MORE_FAVORABLE //高于favorable
+	* int THREAD_PRIORITY_URGENT_AUDIO //标准较重要音频播放优先级
+	* int THREAD_PRIORITY_URGENT_DISPLAY //标准较重要显示优先级，对于输入事件同样适用。
 
 ### 参考资料
 * <a target="_blank" href="https://developer.android.com/training/volley/index.html">https://developer.android.com/training/volley/index.html</a>

@@ -18,12 +18,15 @@ package com.github.why168.volley;
 
 /**
  * An interface for performing requests.
+ * 一个接口来执行请求。
  */
 public interface Network {
     /**
      * Performs the specified request.
-     * @param request Request to process
-     * @return A {@link NetworkResponse} with data and caching metadata; will never be null
+     * 执行指定的请求。
+     *
+     * @param request Request to process 请求处理
+     * @return A {@link NetworkResponse} with data and caching metadata; will never be null 数据和缓存元数据;永远不会空
      * @throws VolleyError on errors
      */
     public NetworkResponse performRequest(Request<?> request) throws VolleyError;
