@@ -20,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".study.RequestActivity" />
+        <activity android:name=".study.T1Activity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.github.why168.volleystudy.study.RequestActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="HttpRequest$1"
+        android:text="请求方式一\nvolley默认的请求方式\n2.3以后底层用的是HttpURLConnection"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="HttpRequest$2"
+        android:text="请求方式二：\n底层使用okHttp-apache"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="HttpRequest$3"
+        android:text="请求方式三：\n底层使用okHttp-urlConnection"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="HttpRequest$4"
+        android:text="请求方式四：\n多类型上传(文件+字符)"
+        android:textAllCaps="false" />
+
+</LinearLayout>
