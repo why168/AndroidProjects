@@ -183,12 +183,13 @@ public class RequestActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Edwin", error.getMessage(), error);
-            }
-        });
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Edwin", error.getMessage(), error);
+                    }
+                });
         mQueue.add(xmlRequest);
     }
 }

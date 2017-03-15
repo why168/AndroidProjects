@@ -9,6 +9,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
+ * MultipartRequest
+ *
  * @author Edwin.Wu
  * @version 2017/3/2$ 11:58$
  * @since JDK1.8
