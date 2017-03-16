@@ -21,15 +21,17 @@ import java.io.IOException;
  * Observes, modifies, and potentially short-circuits requests going out and the corresponding
  * responses coming back in. Typically interceptors add, remove, or transform headers on the request
  * or response.
+ * <p>
+ * 观察、修改和短路可能请求外出和相应的响应在回来。通常拦截器添加、删除或转换头的请求或响应。
  */
 public interface Interceptor {
-  Response intercept(Chain chain) throws IOException;
+    Response intercept(Chain chain) throws IOException;
 
-  interface Chain {
-    Request request();
+    interface Chain {
+        Request request();
 
-    Response proceed(Request request) throws IOException;
+        Response proceed(Request request) throws IOException;
 
-    Connection connection();
-  }
+        Connection connection();
+    }
 }
