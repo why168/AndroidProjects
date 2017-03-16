@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.github.why168.volleystudy.study.RequestActivity;
 import com.github.why168.volleystudy.study.T1Activity;
+import com.github.why168.volleystudy.study.ThreadActivity;
 
 /**
  * https://developer.android.com/training/volley/index.html
@@ -31,5 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void Start$T1Activity(View view) {
         startActivity(new Intent(this, T1Activity.class));
+    }
+
+    public void Start$ThreadActivity(View view) {
+        startActivity(new Intent(this, ThreadActivity.class));
     }
 }

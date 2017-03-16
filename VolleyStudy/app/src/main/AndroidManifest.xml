@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".study.RequestActivity" />
-        <activity android:name=".study.T1Activity"></activity>
+        <activity android:name=".study.T1Activity" />
+        <activity android:name=".study.ThreadActivity"></activity>
     </application>
 
 </manifest>

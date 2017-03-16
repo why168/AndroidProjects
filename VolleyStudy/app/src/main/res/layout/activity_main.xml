@@ -25,4 +25,11 @@
         android:text="Start$T1Activity"
         android:textAllCaps="false" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="Start$ThreadActivity"
+        android:text="Start$ThreadActivity"
+        android:textAllCaps="false" />
+
 </LinearLayout>
