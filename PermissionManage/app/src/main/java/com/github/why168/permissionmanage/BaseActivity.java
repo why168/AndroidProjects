@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 /**
+ * BaseActivity
+ *
  * @author Edwin.Wu
  * @version 2017/3/17$ 14:12$
  * @since JDK1.8
