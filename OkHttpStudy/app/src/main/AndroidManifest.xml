@@ -18,19 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity-alias
-            android:name="OkHttpStudy-Alias"
-            android:icon="@mipmap/ic_launcher_round"
-            android:label="OkHttpStudy-Alias"
-            android:targetActivity="MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
     </application>
 
 </manifest>
