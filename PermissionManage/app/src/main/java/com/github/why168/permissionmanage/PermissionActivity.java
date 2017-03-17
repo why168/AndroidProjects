@@ -2,14 +2,9 @@ package com.github.why168.permissionmanage;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +14,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.jar.Manifest;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -45,7 +39,7 @@ import okhttp3.ResponseBody;
  * @version 2017/3/17 11:59
  * @since JDK1.8
  */
-public class PermissionActivity extends AppCompatActivity {
+public class PermissionActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,34 +48,31 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
     public void callPhone(View view) {
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
-            //TODO 权限申请处理
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.CALL_PHONE}, 1);
-        } else {
+        if (hasPermission(android.Manifest.permission.CALL_PHONE)) {
             doCallPhone();
+        } else {
+            requestPermission(PermissionsConstans.CALL_PHONE_CODE, android.Manifest.permission.CALL_PHONE);
         }
     }
 
-    private void doCallPhone() {
+    public void sdCardPermission(View view) {
+        if (hasPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            doSDCardPermission();
+        } else {
+            requestPermission(PermissionsConstans.WRITE_STORAGE_CODE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+    }
+
+
+    @Override
+    protected void doCallPhone() {
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + "10000"));
         startActivity(intent);
     }
 
-    public void sdCardPermission(View view) {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            //TODO 权限申请处理
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
-        } else {
-            doSDCardPermission();
-        }
-    }
-
-    private void doSDCardPermission() {
+    @Override
+    protected void doSDCardPermission() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request
                 .Builder()
@@ -117,27 +108,4 @@ public class PermissionActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case 1:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    doCallPhone();
-                } else {
-                    //TODO 提示用户权限未授予
-                    Toast.makeText(PermissionActivity.this, "ACTION_CALL 权限未开启", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case 2:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    doSDCardPermission();
-                } else {
-                    //TODO 提示用户权限未授予
-                    Toast.makeText(PermissionActivity.this, "WRITE_EXTERNAL_STORAGE 权限未开启", Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
-    }
 }
