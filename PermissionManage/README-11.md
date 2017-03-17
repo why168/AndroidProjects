@@ -268,7 +268,7 @@ public class PermissionActivity extends BaseActivity {
 ```
 <br/>
 
-```
+```java
 /**
  * PermissionGen框架
  *
