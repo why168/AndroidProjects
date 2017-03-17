@@ -23,17 +23,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * Android6.0以后 危险权限声明
- * <p>
- * https://developer.android.google.cn/guide/topics/security/permissions.html
- * <p>
- * http://www.cnblogs.com/why168888/p/5618650.html
- * <p>
- * adb shell pm list permissions -d -g
- * <p>
- * ContextCompat.checkSelfPermission()
- * ActivityCompat.requestPermissions();
- * ActivityCompat.shouldShowRequestPermissionRationale()
+ * BaseActivity
  *
  * @author Edwin.Wu
  * @version 2017/3/17 11:59
