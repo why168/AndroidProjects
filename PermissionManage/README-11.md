@@ -8,6 +8,8 @@
 
 ### 参考资料
 * <a target="_blank" href="https://developer.android.google.cn/guide/topics/security/permissions.html">https://developer.android.google.cn/guide/topics/security/permissions.html</a>
+* <a target="_blank" href="https://github.com/lovedise/PermissionGen">https://github.com/lovedise/PermissionGen</a>
+* <a target="_blank" href="https://github.com/tbruyelle/RxPermissions">https://github.com/tbruyelle/RxPermissions</a>
 * 以下是需要单独申请的权限,共分为9组,每组只要有一个权限申请成功了,就默认整组权限都可以使用了
 
 ```xml
@@ -327,4 +329,84 @@ public class PermissionGenActivity extends AppCompatActivity {
         PermissionGen.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 }
+```
+
+```
+/**
+ * RxPermissionGen框架
+ *
+ * @author Edwin.Wu
+ * @version 2017/3/19 14:17
+ * @since JDK1.8
+ */
+public class RxPermissionActivity extends AppCompatActivity {
+    private static final String TAG = "RxPermissionsSample";
+    private Camera camera;
+    private SurfaceView surfaceView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions.setLogging(true);
+
+        setContentView(R.layout.activity_rx_permission);
+
+        surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
+
+        RxView.clicks(findViewById(R.id.enableCamera))
+                // Ask for permissions when button is clicked
+                .compose(rxPermissions.ensureEach(Manifest.permission.CAMERA))
+                .subscribe(new Action1<Permission>() {
+                               @Override
+                               public void call(Permission permission) {
+                                   Log.i(TAG, "Permission result " + permission);
+                                   if (permission.granted) {
+                                       releaseCamera();
+                                       camera = Camera.open(0);
+                                       try {
+                                           camera.setPreviewDisplay(surfaceView.getHolder());
+                                           camera.startPreview();
+                                       } catch (IOException e) {
+                                           Log.e(TAG, "Error while trying to display the camera preview", e);
+                                       }
+                                   } else if (permission.shouldShowRequestPermissionRationale) {
+                                       // Denied permission without ask never again
+                                       Toast.makeText(RxPermissionActivity.this, "Denied permission without ask never again", Toast.LENGTH_SHORT).show();
+                                   } else {
+                                       // Denied permission with ask never again
+                                       // Need to go to the settings
+                                       Toast.makeText(RxPermissionActivity.this, "Permission denied, can't enable the camera", Toast.LENGTH_SHORT).show();
+                                   }
+                               }
+                           },
+                        new Action1<Throwable>() {
+                            @Override
+                            public void call(Throwable t) {
+                                Log.e(TAG, "onError", t);
+                            }
+                        },
+                        new Action0() {
+                            @Override
+                            public void call() {
+                                Log.i(TAG, "OnComplete");
+                            }
+                        });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseCamera();
+    }
+
+    private void releaseCamera() {
+        if (camera != null) {
+            camera.release();
+            camera = null;
+        }
+    }
+}
+
 ```

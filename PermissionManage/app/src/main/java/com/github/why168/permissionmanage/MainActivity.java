@@ -41,4 +41,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, PermissionGenActivity.class));
     }
 
+    public void RxPermission$Activity(View view) {
+        startActivity(new Intent(this, RxPermissionActivity.class));
+    }
 }

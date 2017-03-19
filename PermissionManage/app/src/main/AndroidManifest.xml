@@ -32,7 +32,8 @@
         </activity>
         <activity android:name=".PermissionActivity" />
         <activity android:name=".PermissionGenActivity" />
-        <activity android:name=".ContactActivity"></activity>
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".RxPermissionActivity"></activity>
     </application>
 
 </manifest>
