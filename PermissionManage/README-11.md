@@ -331,9 +331,9 @@ public class PermissionGenActivity extends AppCompatActivity {
 }
 ```
 
-```
+```java
 /**
- * RxPermissionGen框架
+ * RxPermission框架
  *
  * @author Edwin.Wu
  * @version 2017/3/19 14:17
