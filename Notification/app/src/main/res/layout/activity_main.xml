@@ -12,7 +12,16 @@
     tools:context="com.github.why168.notification.MainActivity">
 
     <Button
-        android:onClick="simpleNotify"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="simpleNotify"
+        android:text="SimpleNotify"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="standardNotify"
+        android:text="StandardNotify"
+        android:textAllCaps="false" />
 </LinearLayout>
