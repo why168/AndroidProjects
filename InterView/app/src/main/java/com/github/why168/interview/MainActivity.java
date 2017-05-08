@@ -2,13 +2,18 @@ package com.github.why168.interview;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static String TAG = "MainActivity";
+    private boolean mIsExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,5 +86,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         Log.e("Edwin", TAG + " —> onDestroy");
         super.onDestroy();
+    }
+
+    /**
+     * 双击返回键退出
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mIsExit) {
+                this.finish();
+            } else {
+                Toast.makeText(this, "2秒内,再按一次退出", Toast.LENGTH_SHORT).show();
+                mIsExit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mIsExit = false;
+                    }
+                }, 2000);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
