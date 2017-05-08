@@ -7,20 +7,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * TaskActivity
+ *
+ * @author Edwin.Wu
+ * @version 2017/5/8 18:49
+ * @since JDK1.8
+ */
+public class TaskActivity extends AppCompatActivity {
     private static String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e("Edwin", TAG + " —> onCreate");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_task);
     }
 
-    public void onStartLife(View view) {
-        startActivity(new Intent(this, LifeActivity.class));
+    public void onStartMain(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
-
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {

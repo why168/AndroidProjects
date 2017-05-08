@@ -69,7 +69,6 @@ public class HandlerThreadActivity extends AppCompatActivity {
 
         handler = new MyHandler(thread.getLooper(), HandlerThreadActivity.this);
         handler.sendEmptyMessage(1);
-
     }
 
     @Override

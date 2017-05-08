@@ -43,6 +43,7 @@ public class FirstActivity extends AppCompatActivity {
 
         thread = new HandlerThread("Handler Thread");
         thread.start();
+
         threadHandler = new Handler(thread.getLooper()) {
             @Override
             public void handleMessage(Message msg) {
