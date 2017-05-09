@@ -3,7 +3,6 @@ package com.github.why168.interview;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStartLife(View view) {
-        startActivity(new Intent(this, LifeActivity.class));
+        Intent intent = new Intent(this, LifeActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        startActivity(intent);
     }
 
 

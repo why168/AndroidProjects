@@ -26,6 +26,7 @@ public class LifeActivity extends AppCompatActivity {
 
     public void onStartTask(View view) {
         Intent intent = new Intent(this, TaskActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         startActivity(intent);
     }
 
