@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context="com.github.why168.interview.activity.ReceiverActivity">
 
     <Button
@@ -17,5 +19,19 @@
         android:layout_height="wrap_content"
         android:onClick="unSendOrderedBroadcast"
         android:text="发送无序广播"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onDynamicBroadcast"
+        android:text="动态注册广播"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="unDynamicBroadcast"
+        android:text="动态解除广播"
         android:textAllCaps="false" />
 </LinearLayout>

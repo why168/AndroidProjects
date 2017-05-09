@@ -1,11 +1,13 @@
 package com.github.why168.interview.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.github.why168.interview.R;
+import com.github.why168.interview.broadcast.MyReceiver3;
 
 /**
  * MyReceiver1
@@ -16,11 +18,13 @@ import com.github.why168.interview.R;
  * @since JDK1.8
  */
 public class ReceiverActivity extends AppCompatActivity {
+    private MyReceiver3 mReceiver3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiver);
+        mReceiver3 = new MyReceiver3();
     }
 
     /**
@@ -45,5 +49,25 @@ public class ReceiverActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction("com.github.why168.interview.broadcast");
         sendBroadcast(intent, null);
+    }
+
+    /**
+     * 动态注册
+     *
+     * @param view
+     */
+    public void onDynamicBroadcast(View view) {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.github.why168.interview.broadcast");
+        registerReceiver(mReceiver3, intentFilter);
+    }
+
+    /**
+     * 动态解除
+     *
+     * @param view
+     */
+    public void unDynamicBroadcast(View view) {
+        unregisterReceiver(mReceiver3);
     }
 }
