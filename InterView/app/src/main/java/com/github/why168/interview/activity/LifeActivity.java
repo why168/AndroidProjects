@@ -1,4 +1,4 @@
-package com.github.why168.interview;
+package com.github.why168.interview.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,26 +7,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.github.why168.interview.R;
+
 /**
- * TaskActivity
+ * 生命周期
  *
  * @author Edwin.Wu
- * @version 2017/5/8 18:49
+ * @version 2017/5/7 01:02
  * @since JDK1.8
  */
-public class TaskActivity extends AppCompatActivity {
-    private static String TAG = "MainActivity";
+public class LifeActivity extends AppCompatActivity {
+    private static String TAG = "LifeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e("Edwin", TAG + " —> onCreate");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
+        setContentView(R.layout.activity_life);
     }
 
-    public void onStartMain(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    public void onStartTask(View view) {
+        Intent intent = new Intent(this, TaskActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         startActivity(intent);
     }

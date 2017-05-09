@@ -9,17 +9,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <receiver
+            android:name=".broadcast.MyReceiver1"
+            android:enabled="true"
+            android:exported="false">
+
+            <!-- priority优先级：数字越高优先级越高 -->
+            <intent-filter android:priority="1000">
+                <action android:name="com.github.why168.interview.broadcast" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".broadcast.MyReceiver2"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="-1000">
+                <action android:name="com.github.why168.interview.broadcast" />
+            </intent-filter>
+        </receiver>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:launchMode="singleTop">
+
+        </activity>
+        <activity android:name=".activity.LifeActivity" />
+        <activity android:name=".activity.TaskActivity" />
+
+        <activity android:name=".activity.ReceiverActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LifeActivity" />
-        <activity android:name=".TaskActivity" />
     </application>
 
 </manifest>

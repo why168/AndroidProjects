@@ -1,4 +1,4 @@
-package com.github.why168.interview;
+package com.github.why168.interview.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import com.github.why168.interview.R;
 
 public class MainActivity extends AppCompatActivity {
     private static String TAG = "MainActivity";
