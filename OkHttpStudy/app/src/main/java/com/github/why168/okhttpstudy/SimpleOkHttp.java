@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -18,8 +19,10 @@ import okhttp3.internal.logging.HttpLoggingInterceptor;
  * @since JDK1.8
  */
 class SimpleOkHttp {
+    private static Dispatcher dispatcher;
     private final static OkHttpClient client = new OkHttpClient
             .Builder()
+            .dispatcher(dispatcher = new Dispatcher())
             .readTimeout(500, TimeUnit.MILLISECONDS)
             .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build();
@@ -48,7 +51,8 @@ class SimpleOkHttp {
      * 异步执行
      */
     static void okHttp$2() {
-        client.newCall(request).enqueue(new Callback() {
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 System.out.println("Exception: " + e);
@@ -61,5 +65,6 @@ class SimpleOkHttp {
                 System.out.println("ResponseBody: " + response.body().string());
             }
         });
+        call.cancel();
     }
 }

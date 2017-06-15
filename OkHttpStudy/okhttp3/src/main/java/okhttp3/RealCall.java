@@ -79,11 +79,6 @@ final class RealCall implements Call {
         }
     }
 
-    private void captureCallStackTrace() {
-        Object callStackTrace = Platform.get().getStackTraceForCloseable("response.body().close()");
-        retryAndFollowUpInterceptor.setCallStackTrace(callStackTrace);
-    }
-
     /**
      * 异步执行
      *
@@ -98,6 +93,12 @@ final class RealCall implements Call {
         captureCallStackTrace();
         client.dispatcher().enqueue(new AsyncCall(responseCallback));
     }
+
+    private void captureCallStackTrace() {
+        Object callStackTrace = Platform.get().getStackTraceForCloseable("response.body().close()");
+        retryAndFollowUpInterceptor.setCallStackTrace(callStackTrace);
+    }
+
 
     @Override
     public void cancel() {

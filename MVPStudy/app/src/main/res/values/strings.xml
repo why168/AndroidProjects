@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2015 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">MVPStudy</string>
+    <string name="add_task">新待办事项</string>
+    <string name="edit_task">编辑任务</string>
+    <string name="task_marked_complete">任务标记完成</string>
+    <string name="task_marked_active">任务标记活跃</string>
+    <string name="loading_tasks_error">当加载任务时发生错误</string>
+    <string name="completed_tasks_cleared">完成任务了</string>
+    <string name="menu_filter">过滤器</string>
+    <string name="menu_clear">明确的完成</string>
+    <string name="menu_delete_task">删除任务</string>
+    <string name="navigation_view_header_title">行动计划</string>
+    <string name="title_hint">标题</string>
+    <string name="description_hint">在这里输入你的待办事项。</string>
+    <string name="empty_task_message">任务不能为空</string>
+    <string name="successfully_saved_task_message">任务保存</string>
+    <string name="list_title">待办事项列表</string>
+    <string name="statistics_title">统计数据</string>
+    <string name="statistics_no_tasks">你没有任务。</string>
+    <string name="statistics_active_tasks">活动任务:</string>
+    <string name="statistics_completed_tasks">完成任务:</string>
+    <string name="statistics_error">错误加载数据。</string>
+    <string name="no_data">没有数据</string>
+    <string name="loading">加载</string>
+
+    <string-array name="list_tasks_array">
+        <item>@string/nav_all</item>
+        <item>@string/nav_active</item>
+        <item>@string/nav_completed</item>
+    </string-array>
+    <string name="nav_all">所有</string>
+    <string name="nav_active">活动</string>
+    <string name="nav_completed">完成</string>
+    <string name="label_all">所有的任务</string>
+    <string name="label_active">积极的行动计划</string>
+    <string name="label_completed">完成任务</string>
+    <string name="no_tasks_all">你没有行动计划!</string>
+    <string name="no_tasks_active">你没有积极的行动计划!</string>
+    <string name="no_tasks_completed">你没有完成任务!</string>
+    <string name="no_tasks_add">添加一个任务项+</string>
+    <string name="refresh">刷新</string>
+
+</resources>
+
