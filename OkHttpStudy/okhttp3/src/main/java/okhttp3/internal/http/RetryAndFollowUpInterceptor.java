@@ -87,7 +87,8 @@ public final class RetryAndFollowUpInterceptor implements Interceptor {
     public void cancel() {
         canceled = true;
         StreamAllocation streamAllocation = this.streamAllocation;
-        if (streamAllocation != null) streamAllocation.cancel();
+        if (streamAllocation != null)
+            streamAllocation.cancel();
     }
 
     public boolean isCanceled() {

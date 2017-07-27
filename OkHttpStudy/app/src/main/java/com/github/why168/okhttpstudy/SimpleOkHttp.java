@@ -65,6 +65,9 @@ class SimpleOkHttp {
                 System.out.println("ResponseBody: " + response.body().string());
             }
         });
-        call.cancel();
+    }
+
+    static void okHttp$CancelAll() {
+        client.dispatcher().cancelAll();
     }
 }
