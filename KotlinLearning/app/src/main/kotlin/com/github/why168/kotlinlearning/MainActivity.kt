@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
 
         hello.text = "Hello, world!"
 
-
     }
 
     fun demo(source: List<Int>) {
