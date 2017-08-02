@@ -1,0 +1,95 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .DS_Store
+* .gitignore
+* README.md
+* ic_launcher-web.png
+* proguard-project.txt
+* remove_license.sh
+* tests/
+* tests/.DS_Store
+* tests/com/
+* tests/com/example/
+* tests/com/example/android/
+* tests/com/example/android/testing/
+* tests/com/example/android/testing/espresso/
+* tests/com/example/android/testing/espresso/basicsamplebundled/
+* tests/com/example/android/testing/espresso/basicsamplebundled/tests/
+* tests/com/example/android/testing/espresso/basicsamplebundled/tests/ChangeTextBehaviorTest.java
+* tests/com/example/android/testing/espresso/basicsamplebundled/tests/EnableJUnit4InEclipse.java
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:26.+
+guava-18.0.jar => com.google.guava:guava:18.0
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => BasicSampleBundled/src/main/AndroidManifest.xml
+* libs/espresso-contrib-2.2-release-no-dep.jar => BasicSampleBundled/libs/espresso-contrib-2.2-release-no-dep.jar
+* libs/espresso-core-2.2-release-no-dep.jar => BasicSampleBundled/libs/espresso-core-2.2-release-no-dep.jar
+* libs/espresso-idling-resource-2.2-release-no-dep.jar => BasicSampleBundled/libs/espresso-idling-resource-2.2-release-no-dep.jar
+* libs/espresso-intents-2.2-release-no-dep.jar => BasicSampleBundled/libs/espresso-intents-2.2-release-no-dep.jar
+* libs/espresso-web-2.2-release-no-dep.jar => BasicSampleBundled/libs/espresso-web-2.2-release-no-dep.jar
+* libs/exposed-instrumentation-api-publish-0.3-release-no-dep.jar => BasicSampleBundled/libs/exposed-instrumentation-api-publish-0.3-release-no-dep.jar
+* libs/hamcrest-core-1.3.jar => BasicSampleBundled/libs/hamcrest-core-1.3.jar
+* libs/hamcrest-integration-1.3.jar => BasicSampleBundled/libs/hamcrest-integration-1.3.jar
+* libs/hamcrest-library-1.3.jar => BasicSampleBundled/libs/hamcrest-library-1.3.jar
+* libs/javawriter-2.1.1.jar => BasicSampleBundled/libs/javawriter-2.1.1.jar
+* libs/javax.annotation-api-1.2.jar => BasicSampleBundled/libs/javax.annotation-api-1.2.jar
+* libs/javax.inject-1.jar => BasicSampleBundled/libs/javax.inject-1.jar
+* libs/jsr305-2.0.1.jar => BasicSampleBundled/libs/jsr305-2.0.1.jar
+* libs/junit-4.12.jar => BasicSampleBundled/libs/junit-4.12.jar
+* libs/rules-0.3-release-no-dep.jar => BasicSampleBundled/libs/rules-0.3-release-no-dep.jar
+* libs/runner-0.3-release-no-dep.jar => BasicSampleBundled/libs/runner-0.3-release-no-dep.jar
+* libs/uiautomator-v18-2.1.1-release-no-dep.jar => BasicSampleBundled/libs/uiautomator-v18-2.1.1-release-no-dep.jar
+* res/ => BasicSampleBundled/src/main/res/
+* src/ => BasicSampleBundled/src/main/java/
+* src/.DS_Store => BasicSampleBundled/src/main/resources/.DS_Store
+
+Missing Android Support Repository:
+-----------------------------------
+Some useful libraries, such as the Android Support Library, are
+installed from a special Maven repository, which should be installed
+via the SDK manager.
+
+It looks like this library is missing from your SDK installation at:
+null
+
+To install it, open the SDK manager, and in the Extras category,
+select "Android Support Repository". You may also want to install the
+"Google Repository" if you want to use libraries like Google Play
+Services.
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

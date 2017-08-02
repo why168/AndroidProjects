@@ -1,29 +1,23 @@
-## 14.AndroidTestingStudy
+package com.github.why168;
 
-### 介绍
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiDevice;
+import android.util.Log;
 
-* AndroidJUnitRunner：适用于 Android 且与 JUnit 4 兼容的测试运行器
-* Espresso：UI 测试框架；适合应用中的功能性 UI 测试
-* UI Automator：UI 测试框架；适合跨系统和已安装应用的跨应用功能性 UI 测试
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
-### 参考资料
-
-* <a target="_blank" href="https://developer.android.com/topic/libraries/testing-support-library/index.html">https://developer.android.com/topic/libraries/testing-support-library/index.html</a>
-
-
-### 示例代码
-
-
-```gradle
-androidTestCompile "com.android.support:support-annotations:26.0.0-alpha1"
-androidTestCompile 'com.android.support.test:runner:0.5'
-androidTestCompile 'com.android.support.test:rules:0.5'
-androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
-```
-
-```java
 /**
  * DemoEspressoTest
  *
@@ -63,5 +57,3 @@ public class DemoEspressoTest {
         }
     }
 }
-    
-```
