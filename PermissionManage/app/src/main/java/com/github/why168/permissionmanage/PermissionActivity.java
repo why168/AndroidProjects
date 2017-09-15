@@ -1,10 +1,8 @@
 package com.github.why168.permissionmanage;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,7 +39,7 @@ public class PermissionActivity extends BaseActivity {
         if (hasPermission(android.Manifest.permission.CALL_PHONE)) {
             doCallPhone();
         } else {
-            requestPermission(PermissionsConstans.CALL_PHONE_CODE, android.Manifest.permission.CALL_PHONE);
+            requestPermission(PermissionsConstants.CALL_PHONE_CODE, android.Manifest.permission.CALL_PHONE);
         }
     }
 
@@ -49,7 +47,7 @@ public class PermissionActivity extends BaseActivity {
         if (hasPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             doSDCardPermission();
         } else {
-            requestPermission(PermissionsConstans.WRITE_STORAGE_CODE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            requestPermission(PermissionsConstants.WRITE_STORAGE_CODE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
     }
 

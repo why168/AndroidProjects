@@ -52,7 +52,7 @@ public class BaseActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-            case PermissionsConstans.WRITE_STORAGE_CODE:
+            case PermissionsConstants.WRITE_STORAGE_CODE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     doSDCardPermission();
                 } else {
@@ -60,7 +60,7 @@ public class BaseActivity extends AppCompatActivity {
                     Toast.makeText(BaseActivity.this, "WRITE_EXTERNAL_STORAGE 权限未开启", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case PermissionsConstans.CALL_PHONE_CODE:
+            case PermissionsConstants.CALL_PHONE_CODE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     doCallPhone();
                 } else {
