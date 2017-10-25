@@ -45,7 +45,8 @@ android {
             keyPassword 'Edwin666666'
             storeFile file('./AppKeyStore.jks')
             storePassword '666666'
-            v2SigningEnabled false //Android 7.0 中新增了 APK Signature Scheme v2 签名方式
+            v1SigningEnabled true 
+            v2SigningEnabled true //Android 7.0 中新增了 APK Signature Scheme v2 签名方式
         }
     }
     /**
@@ -84,8 +85,8 @@ android {
                 APP_ID  : "APP_ID111111",
                 APP_KEY : "APP_KEY222222",
                 APP_NAME: appName,
-                APP_LOGO: appLogo
-        ]
+                APP_LOGO: appLogo
+        ]
 
         /**
          * Native Development Kit
