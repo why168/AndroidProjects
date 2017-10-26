@@ -192,7 +192,6 @@ public class RxPermissions {
                 mRxPermissionsFragment.setSubjectForPermission(permission, subject);
             }
 
-            list.add(subject);
         }
 
         if (!unrequestedPermissions.isEmpty()) {

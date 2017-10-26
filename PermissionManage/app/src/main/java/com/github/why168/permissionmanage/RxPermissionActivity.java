@@ -42,7 +42,7 @@ public class RxPermissionActivity extends AppCompatActivity {
 
         RxView.clicks(findViewById(R.id.enableCamera))
                 // Ask for permissions when button is clicked
-                .compose(rxPermissions.ensureEach(Manifest.permission.CAMERA))
+                .compose(rxPermissions.ensureEach(Manifest.permission.READ_EXTERNAL_STORAGE))
                 .subscribe(new Action1<Permission>() {
                                @Override
                                public void call(Permission permission) {
