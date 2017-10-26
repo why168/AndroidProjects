@@ -33,6 +33,7 @@
 
 ### 示例代码
 ```groovy
+
 apply plugin: 'com.android.application'
 
 android {
@@ -45,8 +46,7 @@ android {
             keyPassword 'Edwin666666'
             storeFile file('./AppKeyStore.jks')
             storePassword '666666'
-            v1SigningEnabled true 
-            v2SigningEnabled true //Android 7.0 中新增了 APK Signature Scheme v2 签名方式
+            v2SigningEnabled false //Android 7.0 中新增了 APK Signature Scheme v2 签名方式
         }
     }
     /**
@@ -63,7 +63,7 @@ android {
     def appLogo = "@mipmap/ic_launcher"
 
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId pageName
         minSdkVersion 11
@@ -72,11 +72,13 @@ android {
         versionName "1.0"
 
         /**
+         * Gradle3.0删除这一块
+         *
          * 支持lambda
          */
-        jackOptions {
-            enabled true
-        }
+//        jackOptions {
+//            enabled true
+//        }
 
         /**
          * 类似下面productFlavors
@@ -85,8 +87,8 @@ android {
                 APP_ID  : "APP_ID111111",
                 APP_KEY : "APP_KEY222222",
                 APP_NAME: appName,
-                APP_LOGO: appLogo
-        ]
+                APP_LOGO: appLogo
+        ]
 
         /**
          * Native Development Kit
@@ -95,6 +97,7 @@ android {
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'mips'
         }
     }
+
     buildTypes {
         debug {
             debuggable true
@@ -114,6 +117,7 @@ android {
             signingConfig signingConfigs.config
         }
     }
+
     /**
      * 源设置
      */
@@ -122,45 +126,82 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-    /**
-     * 多渠道配置，下面的关键字'CHANNEL_NAME'与AndroidManifest里面必须一致。
-     */
-    productFlavors {
-        baidu {//百度市场
-            manifestPlaceholders = [CHANNEL_NAME: 500001]
-        }
-        yingyongbai {//腾讯应用市场
-            manifestPlaceholders = [CHANNEL_NAME: 500002];
-        }
-        xiaomi {//小米应用市场
-            manifestPlaceholders = [CHANNEL_NAME: 500003];
-        }
-        store360 {//360商店
-            manifestPlaceholders = [CHANNEL_NAME: 500004];
-        }
-        anzhi {//安智市场
-            manifestPlaceholders = [CHANNEL_NAME: 500005];
-        }
-    }
-    /**
-     * apk名字自定义
-     */
-    android.applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            def releaseTime = new Date().format("yyyy-MM-dd HH:MM", TimeZone.getTimeZone("UTC"))
-            def fileName = outputFile.name.replace(".apk", "-V" + defaultConfig.versionName + "_" + releaseTime + ".apk")
-            output.outputFile = new File(outputFile.parent, fileName)
 
-        }
-    }
     /**
-     * JDK1.8编译选项
+     * Gradle3.0以后，删除jackOptions
+     * 为了实现Java 8，保留下面的配置。
      */
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    /**
+     * Gradle3.0以前的配置
+     * 多渠道配置，下面的关键字'CHANNEL_NAME'与AndroidManifest里面必须一致。
+     */
+//    productFlavors {
+//        baidu {//百度市场
+//            manifestPlaceholders = [CHANNEL_NAME: 500001]
+//        }
+//        yingyongbai {//腾讯应用市场
+//            manifestPlaceholders = [CHANNEL_NAME: 500002];
+//        }
+//        xiaomi {//小米应用市场
+//            manifestPlaceholders = [CHANNEL_NAME: 500003];
+//        }
+//        store360 {//360商店
+//            manifestPlaceholders = [CHANNEL_NAME: 500004];
+//        }
+//        anzhi {//安智市场
+//            manifestPlaceholders = [CHANNEL_NAME: 500005];
+//        }
+//    }
+
+    /**
+     * Gradle3.0以前的配置
+     * apk名字自定义
+     */
+//    android.applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def outputFile = output.outputFile
+//            def releaseTime = new Date().format("yyyy-MM-dd HH:MM", TimeZone.getTimeZone("UTC"))
+//            def fileName = outputFile.name.replace(".apk", "-V" + defaultConfig.versionName + "_" + releaseTime + ".apk")
+//            output.outputFile = new File(outputFile.parent, fileName)
+//
+//        }
+//    }
+
+    /**
+     * Gradle3.0以后的配置
+     *
+     * 多渠道配置，下面的关键字'CHANNEL_NAME'与AndroidManifest里面必须一致。
+     */
+    flavorDimensions "default"
+    productFlavors {
+        baidu { dimension "default" } // 百度市场
+        yingyongbai { dimension "default" } // 腾讯应用市场
+        xiaomi { dimension "default" } // 小米应用市场
+        store360 { dimension "default" } // 360市场
+        anzhi { dimension "default" } // 安智市场
+    }
+
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [CHANNEL_NAME: name]
+    }
+
+    /**
+     * Gradle3.0以后的配置
+     *
+     * apk名字自定义
+     */
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${variant.baseName}_v${variant.versionName}(${variant.versionCode}).apk"
+        }
+    }
+
+
     /**
      * 存储库maven仓库设置
      */
@@ -184,9 +225,21 @@ android {
         cruncherEnabled = false
         useNewCruncher = false
     }
+    /**
+     * 关联源码到项目
+     * 在相关的module下的build.gradle中配置
+     */
+    sourceSets {
+        main {
+            java {
+                srcDirs += '源码在本地的绝对路径'
+            }
+        }
+    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.1.0'
 }
+
 ```
