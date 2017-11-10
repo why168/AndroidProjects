@@ -15,7 +15,12 @@
 
 ### 示例代码
 ```java
-PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
+//        PendingIntent.getBroadcast();
+//        PendingIntent.getService();
+//        PendingIntent.getActivities();
+//        PendingIntent.getActivity();
+
+        PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
                 , 1
                 , new Intent(getApplicationContext(), ResultActivity.class)
                 , Intent.FILL_IN_ACTION);
@@ -34,7 +39,6 @@ PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.item_remote_view);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
                 .setVisibility(View.VISIBLE)
                 .setContentTitle("My notification")//标题
                 .setContentText("Hello World!")//正文
@@ -47,9 +51,9 @@ PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
                 .setSortKey("排序键")//设置听命于同一包内的其他通知中此通知的排序键
                 .setOnlyAlertOnce(false)//设置此标志，如果你只喜欢的声音，震动和股票要如果通知尚未显示播放。
                 .setPriority(NotificationCompat.PRIORITY_MAX)//设置相对优先级此通知。
-                .setColor(2554444)//颜色
+                .setColor(Color.GREEN)//颜色
                 .setCategory(NotificationCompat.CATEGORY_PROMO)//设置的通知类别。
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.android_contact))//设置大图标所示股票和通知。
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.qq))//设置大图标所示股票和通知。
                 .setNumber(3)//设置信息条数
                 .setContentInfo("在右边设置大型文本的通知")
                 .setWhen(System.currentTimeMillis())//设置时间
@@ -62,6 +66,12 @@ PendingIntent activities = PendingIntent.getActivity(getApplicationContext()
                 .setProgress(100, 50, false)//进度条
                 .addAction(actionReplyByRemoteInput);
 
+        // 适配Android8.0图标
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            mBuilder.setSmallIcon(R.mipmap.android_os);
+        } else {
+            mBuilder.setSmallIcon(R.mipmap.ic_launcher);
+        }
 
         if (isPlayMusic)
             mBuilder.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.actor));//设置声音播放。它将在默认流上播放。

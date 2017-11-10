@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 .setProgress(100, 50, false)//进度条
                 .addAction(actionReplyByRemoteInput);
 
+        // 适配Android8.0图标
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             mBuilder.setSmallIcon(R.mipmap.android_os);
         } else {
