@@ -96,7 +96,6 @@ public class PermissionGen {
      */
     private static void doExecuteSuccess(Object activity, int requestCode) {
         Method executeMethod = Utils.findMethodWithRequestCode(activity.getClass(), PermissionSuccess.class, requestCode);
-
         executeMethod(activity, executeMethod);
     }
 
@@ -108,7 +107,6 @@ public class PermissionGen {
      */
     private static void doExecuteFail(Object activity, int requestCode) {
         Method executeMethod = Utils.findMethodWithRequestCode(activity.getClass(), PermissionFail.class, requestCode);
-
         executeMethod(activity, executeMethod);
     }
 
@@ -117,7 +115,7 @@ public class PermissionGen {
             try {
                 if (!executeMethod.isAccessible())
                     executeMethod.setAccessible(true);
-                executeMethod.invoke(activity, null);
+                executeMethod.invoke(activity);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {

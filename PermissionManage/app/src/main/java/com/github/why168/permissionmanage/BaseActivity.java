@@ -15,7 +15,7 @@ import android.widget.Toast;
  * @version 2017/3/17$ 14:12$
  * @since JDK1.8
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
