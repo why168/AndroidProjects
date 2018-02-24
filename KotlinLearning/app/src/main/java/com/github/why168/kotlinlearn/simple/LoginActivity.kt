@@ -30,7 +30,7 @@ import java.util.*
  */
 class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     /**
-     * Keep track of the login task to ensure we can cancel it if requested.
+     * Keep track of the login task to ensure we caLoginActivityn cancel it if requested.
      */
     private var mAuthTask: UserLoginTask? = null
 

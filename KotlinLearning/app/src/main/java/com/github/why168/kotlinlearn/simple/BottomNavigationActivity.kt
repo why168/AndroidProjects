@@ -3,6 +3,7 @@ package com.github.why168.kotlinlearn.simple
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import com.github.why168.kotlinlearn.R
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 class BottomNavigationActivity : AppCompatActivity() {
