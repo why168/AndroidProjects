@@ -3,6 +3,7 @@ package com.github.why168.kotlinlearn
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -53,6 +54,10 @@ class MainActivity : BaseActivity() {
             }
         }
         main_WebView.loadUrl("https://github.com/why168/JavaProjects/blob/master/Kotlinlang/README.md")
+    }
+
+    fun onClickTest(view: View) {
+        Toast.makeText(this, "测试onClick", Toast.LENGTH_LONG).show()
     }
 }
 
