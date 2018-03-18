@@ -4,6 +4,8 @@
 
 #####   主要接受子线程发送的数据， 并用此数据配合主线程更新UI。
 #####   代码看会理解到，Handler差不多了。
+#####   Handler的创建、发送、处理消息都要在Looper.prepare()、Looper.loop()之间。
+#####   一个Looper维护一个消息队列，不同的Looper之间的消息队列各自独立，不会影响。
 
 ### 参考资料
 * <a target="_blank" href="https://developer.android.com/training/multiple-threads/communicate-ui.html#Handler">https://developer.android.com/training/multiple-threads/communicate-ui.html#Handler</a>
