@@ -54,23 +54,6 @@ class MainActivity : AppCompatActivity() {
         mainPathTextView.movementMethod = ScrollingMovementMethod.getInstance();
     }
 
-    /**
-     *
-    手机内部文件存储
-         1). 存储的位置
-              /data/data/packageName/files/
-         2). 特点
-              a. 保存较大点的数据(大的文本或图片等)
-              b. 应用卸载时会自动删除
-    手机外部(sd卡)存储
-         1). 存储的位置
-              a. /storage/sdcard/Android/data/packageName/files/ ①
-              b. /storage/sdcard/自定义名称文件夹/ ②
-         2). 特点
-              a.  保存较大点的数据(大的文本或图片等)
-              b. 应用卸载时①会自动删除, 但②不会
-
-     */
 
     private fun initData(): List<String> {
         val arrayList = ArrayList<String>()
