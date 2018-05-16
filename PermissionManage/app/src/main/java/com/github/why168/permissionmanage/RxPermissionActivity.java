@@ -60,7 +60,7 @@ public class RxPermissionActivity extends AppCompatActivity {
                                        // Denied permission without ask never again
                                        Toast.makeText(RxPermissionActivity.this, "Denied permission without ask never again", Toast.LENGTH_SHORT).show();
                                    } else {
-                                       // Denied permission with ask never again
+                                       // Denied perm`ission with ask never again
                                        // Need to go to the settings
                                        Toast.makeText(RxPermissionActivity.this, "Permission denied, can't enable the camera", Toast.LENGTH_SHORT).show();
                                    }
