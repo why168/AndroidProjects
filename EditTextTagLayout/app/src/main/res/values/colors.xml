@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="windowBackgroundSecondary">#F5F6F6</color>
+    <color name="windowBackgroundContrast">#E7E7E7</color>
+    <color name="systemBarBackground">#DFDFDF</color>
+    <color name="colorPrimaryDarkTransparent">#26000000</color>
+    <color name="colorPrimaryDarkSecondary">#00AE30</color>
+    <color name="colorSecondaryDark">#000000</color>
+    <color name="textColorPrimary">#000000</color>
+    <color name="textColorSecondary">#9F9FA3</color>
+    <color name="textColorPrimaryTransparent">#DB000000</color>
+    <color name="textColorSecondaryTransparent">#8B000000</color>
+    <color name="textColorContrast">#FFFFFF</color>
+    <color name="textColorContrastTransparent">#99FFFFFF</color>
+    <color name="textColorDisabledButton">#66FFFFFF</color>
+    <color name="textColorHint">#B2B4B8</color>
+    <color name="textColorInput">#212121</color>
+    <color name="textColorLightButton">#4F4F53</color>
+    <color name="inactiveIconColor">#B6BCBF</color>
+    <color name="inactiveTextColor">#95999B</color>
+    <color name="textColorChatTertiary">#808080</color>
+    <color name="textColorPaymentBody">#575757</color>
+    <color name="subTitleTextColor">#99101010</color>
+    <color name="textColorBody">#B31A1B1C</color>
+    <color name="contrastBackgroundColor">#F9F8F8</color>
+    <color name="shadowColorPassphrase">#B6B9B9</color>
+    <color name="input_underline">#E0E0E0</color>
+    <color name="subTitleBackgroundColor">#B3EEEFF0</color>
+    <color name="categoryTextColor">#79797C</color>
+    <color name="colorPrimarySemiTransparent">#9901C236</color>
+
+    <color name="input_bg">#FFFFFF</color>
+    <color name="balance_bar__bg">#FFFFFF</color>
+    <color name="divider">#E7E9EA</color>
+    <color name="semiTransparentDivider">#80E7E9EA</color>
+    <color name="placeholder">#D1D1D1</color>
+
+    <color name="control_border_color">#01C236</color>
+    <color name="control_text_color">#01C236</color>
+    <color name="control_selected_color">#6601C236</color>
+    <color name="ratingPrimary">#EB6E00</color>
+    <color name="error_color">#FB3E3E</color>
+    <color name="disabled_button_color">#D1D1D1</color>
+    <color name="fullscreen_dark_background">#000000</color>
+    <color name="semi_transparent_overlay">#99000000</color>
+
+    <color name="icon_color">#66000000</color>
+    <color name="profile_icon_text_color">#67676A</color>
+    <color name="border_color">#C7CBCE</color>
+    <color name="border_color_light">#DBDBDB</color>
+    <color name="file_avatar_background">#9E9E9E</color>
+    <color name="icon_tint_dark">#9B9DA4</color>
+    <color name="sectioned_recyclerview_background">#F2F3F4</color>
+
+
+    <color name="web_view_progress_foreground">#03671E</color>
+    <color name="web_view_progress_background">#99E6AE</color>
+    <color name="web_view_address_bar_divider">#4467676A</color>
+</resources>

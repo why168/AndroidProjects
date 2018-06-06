@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ 	Copyright (c) 2017. Toshi Inc
+  ~
+  ~ 	This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <declare-styleable name="RatingBar">
+        <attr name="backgroundColor" format="color" />
+        <attr name="foregroundColor" format="color" />
+        <attr name="progressPercentage" format="integer" />
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ShadowCardView">
+        <attr name="shadow" format="boolean" />
+        <attr name="text" format="string" />
+        <attr name="cornerRadius" format="dimension" />
+    </declare-styleable>
+    
+    <declare-styleable name="StarRating">
+        <attr name="clickable" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="LoadingButton">
+        <attr name="enabledBackground" format="integer"/>
+        <attr name="disabledBackground" format="integer"/>
+        <attr name="buttonText" format="string"/>
+        <attr name="textColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="PaddingButton">
+        <attr name="paddingButtonText" format="string"/>
+        <attr name="paddingButtonImage" format="integer"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.AppCompatTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/text_view"
+    android:layout_width="wrap_content"
+    android:layout_height="36dp"
+    android:textColor="@android:color/white"
+    android:background="#7B68EE"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:paddingLeft="@dimen/margin_three_quarters"
+    android:paddingRight="@dimen/margin_three_quarters"/>

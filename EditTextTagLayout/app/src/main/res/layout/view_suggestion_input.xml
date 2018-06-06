@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ 	Copyright (c) 2017. Toshi Inc
+  ~
+  ~ 	This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:background="@null"
+        android:enabled="false"
+        android:imeOptions="actionDone"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/textColorHint"
+        android:textSize="@dimen/text_size_subtitle" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/word"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:background="@null"
+        android:imeOptions="actionDone"
+        android:inputType="textNoSuggestions"
+        android:longClickable="false"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:minWidth="10dp"
+        android:singleLine="true"
+        android:textColor="@color/textColorInput"
+        android:textColorHint="@color/textColorSecondary"
+        android:textSize="@dimen/text_size_subtitle" />
+
+    <io.github.why168.view.ShadowCardView
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        app:cornerRadius="8dp"
+        app:shadow="true" />
+
+</merge>
