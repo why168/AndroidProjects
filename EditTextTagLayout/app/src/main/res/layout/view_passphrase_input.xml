@@ -10,13 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/hint"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:hint="@string/enter_passphrase"
+            android:textColorHint="#B6B9B9"
             android:paddingEnd="3dp"
             android:paddingStart="3dp"
             android:textSize="@dimen/text_size_subtitle" />

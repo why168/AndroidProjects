@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import io.github.why168.R;
+
 /**
  * 输入建议
  *
