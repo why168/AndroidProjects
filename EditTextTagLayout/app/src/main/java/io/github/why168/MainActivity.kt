@@ -67,19 +67,19 @@ class MainActivity : AppCompatActivity() {
     private fun handlePassphraseFinished(passphrase: List<String>) {
         signIn.setText(R.string.sign_in)
         signIn.setBackgroundResource(R.drawable.background_with_radius_primary_color)
-        signIn.setEnabled(true)
+        signIn.isEnabled = true
     }
 
     private fun updateSignInButton(approvedWords: Int) {
         val wordsLeft = PASSPHRASE_LENGTH - approvedWords
         if (wordsLeft > 0) {
-            val wordsLeftString = getResources().getQuantityString(R.plurals.words, wordsLeft, wordsLeft)
+            val wordsLeftString = resources.getQuantityString(R.plurals.words, wordsLeft, wordsLeft)
             disableSignIn(wordsLeftString)
         }
     }
 
     private fun disableSignIn(string: String) {
-        signIn.setText(string)
+        signIn.text = string
         signIn.setBackgroundResource(R.drawable.background_with_radius_disabled)
         signIn.setEnabled(false)
     }

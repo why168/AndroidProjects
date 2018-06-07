@@ -21,10 +21,10 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import io.github.why168.R;
-import io.github.why168.SearchUtil;
 import rx.Observable;
 import rx.Single;
 import rx.Subscription;
@@ -376,7 +376,7 @@ public class PassWordInputLayout extends FrameLayout {
     }
 
     private void setWordInCell(final SuggestionInputLayout cell, final String word) {
-        //If word is null(word isn't approved), don't clear the text view
+        // If word is null(word isn't approved), don't clear the text view
         if (word == null) return;
         cell.showInputView(word);
     }
@@ -384,7 +384,7 @@ public class PassWordInputLayout extends FrameLayout {
     private Observable<String> getWordSuggestion(final String startOfWord) {
         return Observable.fromCallable(() -> {
             if (startOfWord.length() == 0) return null;
-            return SearchUtil.findStringSuggestion(this.wordList, startOfWord);
+            return findStringSuggestion(this.wordList, startOfWord);
         });
     }
 
@@ -497,7 +497,7 @@ public class PassWordInputLayout extends FrameLayout {
     private Single<String> findMatch(final String wordToFind) {
         return Single
                 .just(wordToFind)
-                .flatMap(word -> Single.fromCallable(() -> SearchUtil.findMatch(this.wordList, word)));
+                .flatMap(word -> Single.fromCallable(() -> findMatch(this.wordList, word)));
     }
 
     private void addWordToView(final String matchResult, final int cellIndex) {
@@ -590,7 +590,7 @@ public class PassWordInputLayout extends FrameLayout {
         return Single.fromCallable(() -> {
             final List<Pair<Boolean, String>> validatedPassphrase = new ArrayList<>();
             for (final String word : passphrase) {
-                final String result = SearchUtil.findMatch(this.wordList, word);
+                final String result = findMatch(this.wordList, word);
                 if (result != null) {
                     validatedPassphrase.add(new Pair<>(true, word));
                 } else {
@@ -631,5 +631,27 @@ public class PassWordInputLayout extends FrameLayout {
 
     private void clearSubscriptions() {
         this.subscriptions.clear();
+    }
+
+
+    public static <T extends Comparable<T>> T findMatch(final List<T> searchList, final T itemToFind) {
+        final int searchResult = Collections.binarySearch(searchList, itemToFind);
+        if (Math.abs(searchResult) >= searchList.size() || searchResult < 0) return null;
+        return searchList.get(searchResult);
+    }
+
+    public static String findStringSuggestion(final List<String> searchList, final String itemToFind) {
+        final int searchResult = Collections.binarySearch(searchList, itemToFind);
+        final int absoluteIndex = Math.abs(searchResult);
+
+        //If the insertion point is >= searchList.size(), compare it to the last item
+        if (absoluteIndex >= searchList.size()) {
+            final String suggestion = searchList.get(searchList.size() - 1);
+            return suggestion.startsWith(itemToFind) ? suggestion : null;
+        }
+
+        final int index = searchResult < 0 ? absoluteIndex - 1 : searchResult;
+        final String suggestion = searchList.get(index);
+        return suggestion != null && suggestion.startsWith(itemToFind) ? suggestion : null;
     }
 }
