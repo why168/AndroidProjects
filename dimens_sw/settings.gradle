@@ -1,0 +1,3 @@
+rootProject.name='dimens_sw'
+include ':app'
+include ':dimesn_sw_lib'
